@@ -1,2 +1,2 @@
 # swissunihockey-game-schedule-pdf-creator
-A web application that generates an serves game schedules as PDF documents
+A web application that generates and serves game schedules as PDF documents
