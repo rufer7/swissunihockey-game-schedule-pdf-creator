@@ -69,6 +69,7 @@ public class SwissunihockeyAPIClientTest {
         when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables))).thenReturn("");
         swissunihockeyAPIClient.getCalendarForTeam(TEAM_ID);
     }
+
     @Test
     public void getCalendarForClubCallsSwissunihockeyAPI() {
         HashMap<String, String> variables = new HashMap<>();
@@ -87,7 +88,7 @@ public class SwissunihockeyAPIClientTest {
     }
 
     @Test
-    public void getCalendarForGroupReturnsScheduleAsCalendar() {
+    public void getCalendarForGroupCallsSwissunihockeyAPI() {
 
     }
 }
