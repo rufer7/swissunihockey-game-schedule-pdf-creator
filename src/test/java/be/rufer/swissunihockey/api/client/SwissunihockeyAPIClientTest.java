@@ -35,6 +35,7 @@ import static org.mockito.Mockito.when;
 public class SwissunihockeyAPIClientTest {
 
     private static final String TEAM_ID = "1";
+    private static final String CLUB_ID = "9";
     private static final String SAMPLE_CALENDAR_STRING = "BEGIN:VCALENDAR\n" +
             "VERSION:2.0\n" +
             "PRODID:icalendar-ruby\n" +
@@ -62,16 +63,27 @@ public class SwissunihockeyAPIClientTest {
     }
 
     @Test(expected = CalendarConversionException.class)
-    public void getCalendarForTeamThrowsExceptionForInvalidResponse() {
+    public void getCalendarForTeamThrowsCalendarConversionExceptionForInvalidResponse() {
         HashMap<String, String> variables = new HashMap<>();
         variables.put("TEAM_ID", TEAM_ID);
         when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables))).thenReturn("");
         swissunihockeyAPIClient.getCalendarForTeam(TEAM_ID);
     }
-
     @Test
-    public void getCalendarForClubReturnsScheduleAsCalendar() {
+    public void getCalendarForClubCallsSwissunihockeyAPI() {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("CLUB_ID", CLUB_ID);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables))).thenReturn(SAMPLE_CALENDAR_STRING);
+        swissunihockeyAPIClient.getCalendarForClub(CLUB_ID);
+        verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables));
+    }
 
+    @Test(expected = CalendarConversionException.class)
+    public void getCalendarForClubThrowsCalendarConversionExceptionForInvalidResponse() {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("CLUB_ID", CLUB_ID);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables))).thenReturn("");
+        swissunihockeyAPIClient.getCalendarForClub(CLUB_ID);
     }
 
     @Test

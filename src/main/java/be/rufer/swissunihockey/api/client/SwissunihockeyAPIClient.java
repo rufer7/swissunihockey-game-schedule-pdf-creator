@@ -40,6 +40,13 @@ public class SwissunihockeyAPIClient {
         return convertToCalendar(response);
     }
 
+    public Calendar getCalendarForClub(String clubId) {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("CLUB_ID", clubId);
+        String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_CLUB, String.class, variables);
+        return convertToCalendar(response);
+    }
+
     private Calendar convertToCalendar(String response) {
         StringReader reader = new StringReader(response);
         CalendarBuilder builder = new CalendarBuilder();

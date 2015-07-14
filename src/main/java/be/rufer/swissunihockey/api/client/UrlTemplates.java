@@ -18,4 +18,5 @@ package be.rufer.swissunihockey.api.client;
 public interface UrlTemplates {
 
     String GET_CALENDAR_FOR_TEAM = "http://api-v2.swissunihockey.ch/api/calendars?team_id={TEAM_ID}";
+    String GET_CALENDAR_FOR_CLUB = "http://api-v2.swissunihockey.ch/api/calendars?club_id={CLUB_ID}";
 }
