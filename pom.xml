@@ -46,7 +46,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>be.rufer.swissunihockey.game.schedule.pdf.creator.Application</start-class>
+        <start-class>be.rufer.swissunihockey.Application</start-class>
         <java.version>1.8</java.version>
 
         <webjars.bootstrap.version>3.3.4</webjars.bootstrap.version>
@@ -110,8 +110,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
