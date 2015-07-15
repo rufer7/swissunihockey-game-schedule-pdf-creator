@@ -84,7 +84,4 @@ public class SwissunihockeyAPIClient {
             throw new CalendarConversionException();
         }
     }
-
-    public void getClubsOfSeason(String season) {
-    }
 }
