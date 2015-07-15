@@ -16,6 +16,7 @@
 package be.rufer.swissunihockey.api.client;
 
 import be.rufer.swissunihockey.api.client.exception.CalendarConversionException;
+import net.fortuna.ical4j.model.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +28,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -62,6 +65,15 @@ public class SwissunihockeyAPIClientTest {
         verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables));
     }
 
+    @Test
+    public void getCalendarForTeamReturnsValidCalendar() {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("TEAM_ID", TEAM_ID);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables))).thenReturn(SAMPLE_CALENDAR_STRING);
+        Calendar calendar = swissunihockeyAPIClient.getCalendarForTeam(TEAM_ID);
+        assertNotNull(calendar);
+    }
+
     @Test(expected = CalendarConversionException.class)
     public void getCalendarForTeamThrowsCalendarConversionExceptionForInvalidResponse() {
         HashMap<String, String> variables = new HashMap<>();
@@ -79,6 +91,15 @@ public class SwissunihockeyAPIClientTest {
         verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables));
     }
 
+    @Test
+    public void getCalendarForClubReturnsValidCalendar() {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("CLUB_ID", CLUB_ID);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables))).thenReturn(SAMPLE_CALENDAR_STRING);
+        Calendar calendar = swissunihockeyAPIClient.getCalendarForClub(CLUB_ID);
+        assertNotNull(calendar);
+    }
+
     @Test(expected = CalendarConversionException.class)
     public void getCalendarForClubThrowsCalendarConversionExceptionForInvalidResponse() {
         HashMap<String, String> variables = new HashMap<>();
@@ -89,6 +110,6 @@ public class SwissunihockeyAPIClientTest {
 
     @Test
     public void getCalendarForGroupCallsSwissunihockeyAPI() {
-
+//        To get a calendar for a group, use season, league, game_class and group arguments.
     }
 }

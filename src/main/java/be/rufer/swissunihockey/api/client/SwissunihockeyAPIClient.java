@@ -27,12 +27,19 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
 
+/**
+ * Client for interaction with the <a href="https://api-v2.swissunihockey.ch/api/doc">siwssunihockey API v2</a>
+ */
 @Service
 public class SwissunihockeyAPIClient {
 
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     * @param teamId Id of the team
+     * @return events from the range of 1 month in the past and 12 months in the future of the team with the given ID
+     */
     public Calendar getCalendarForTeam(String teamId) {
         HashMap<String, String> variables = new HashMap<>();
         variables.put("TEAM_ID", teamId);
@@ -40,6 +47,10 @@ public class SwissunihockeyAPIClient {
         return convertToCalendar(response);
     }
 
+    /**
+     * @param clubId Id of the club
+     * @return events from the range of 1 month in the past and 12 months in the future of the team with the given ID
+     */
     public Calendar getCalendarForClub(String clubId) {
         HashMap<String, String> variables = new HashMap<>();
         variables.put("CLUB_ID", clubId);
