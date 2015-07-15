@@ -15,9 +15,7 @@
  */
 package be.rufer.swissunihockey.client;
 
-import be.rufer.swissunihockey.client.UrlTemplates;
 import be.rufer.swissunihockey.client.exception.CalendarConversionException;
-import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
 import net.fortuna.ical4j.model.Calendar;
 import org.junit.Before;
 import org.junit.Test;
@@ -134,5 +132,15 @@ public class SwissunihockeyAPIClientTest {
         variables.put("GROUP", GROUP);
         when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn("");
         swissunihockeyAPIClient.getCalendarForGroup(SEASON, LEAGUE, GAME_CLASS, GROUP);
+    }
+
+    @Test
+    public void getClubsOfSeasonCallsSwissunihockeyAPI() {
+        // https://api-v2.swissunihockey.ch/api/clubs?season=
+    }
+
+    @Test
+    public void getLeaguesOfSeasonCallsSwissunihockeyAPI() {
+        // https://api-v2.swissunihockey.ch/api/games?mode=list
     }
 }
