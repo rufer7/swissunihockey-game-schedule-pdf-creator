@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.rufer.swissunihockey.api.client;
+package be.rufer.swissunihockey.client;
 
-import be.rufer.swissunihockey.api.client.exception.CalendarConversionException;
+import be.rufer.swissunihockey.client.UrlTemplates;
+import be.rufer.swissunihockey.client.exception.CalendarConversionException;
+import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
 import net.fortuna.ical4j.model.Calendar;
 import org.junit.Before;
 import org.junit.Test;
@@ -118,9 +120,9 @@ public class SwissunihockeyAPIClientTest {
         variables.put("LEAGUE", LEAGUE);
         variables.put("GAME_CLASS", GAME_CLASS);
         variables.put("GROUP", GROUP);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALNEDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn(SAMPLE_CALENDAR_STRING);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn(SAMPLE_CALENDAR_STRING);
         swissunihockeyAPIClient.getCalendarForGroup(SEASON, LEAGUE, GAME_CLASS, GROUP);
-        verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALNEDAR_FOR_GROUP), eq(String.class), eq(variables));
+        verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables));
     }
 
     @Test(expected = CalendarConversionException.class)
@@ -130,7 +132,7 @@ public class SwissunihockeyAPIClientTest {
         variables.put("LEAGUE", LEAGUE);
         variables.put("GAME_CLASS", GAME_CLASS);
         variables.put("GROUP", GROUP);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALNEDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn("");
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn("");
         swissunihockeyAPIClient.getCalendarForGroup(SEASON, LEAGUE, GAME_CLASS, GROUP);
     }
 }

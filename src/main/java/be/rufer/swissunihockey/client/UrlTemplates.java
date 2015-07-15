@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.rufer.swissunihockey.api.client;
+package be.rufer.swissunihockey.client;
 
 public interface UrlTemplates {
 
     String GET_CALENDAR_FOR_TEAM = "http://api-v2.swissunihockey.ch/api/calendars?team_id={TEAM_ID}";
     String GET_CALENDAR_FOR_CLUB = "http://api-v2.swissunihockey.ch/api/calendars?club_id={CLUB_ID}";
-    String GET_CALNEDAR_FOR_GROUP = "http://api-v2.swissunihockey.ch/api/calendars?season={SEASON}&league={LEAGUE}&game_class={GAME_CLASS}&group={GROUP}";
+    String GET_CALENDAR_FOR_GROUP = "http://api-v2.swissunihockey.ch/api/calendars?season={SEASON}&league={LEAGUE}&game_class={GAME_CLASS}&group={GROUP}";
+    String GET_CLUBS_OF_SEASON = "http://api-v2.swissunihockey.ch/api/clubs?season={SEASON}";
 }

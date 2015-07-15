@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.rufer.swissunihockey.api.client;
+package be.rufer.swissunihockey.client;
 
-import be.rufer.swissunihockey.api.client.exception.CalendarConversionException;
+import be.rufer.swissunihockey.client.exception.CalendarConversionException;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
@@ -71,7 +71,7 @@ public class SwissunihockeyAPIClient {
         variables.put("LEAGUE", league);
         variables.put("GAME_CLASS", gameClass);
         variables.put("GROUP", group);
-        String response = restTemplate.getForObject(UrlTemplates.GET_CALNEDAR_FOR_GROUP, String.class, variables);
+        String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_GROUP, String.class, variables);
         return convertToCalendar(response);
     }
 
@@ -83,5 +83,8 @@ public class SwissunihockeyAPIClient {
         } catch (IOException | ParserException e) {
             throw new CalendarConversionException();
         }
+    }
+
+    public void getClubsOfSeason(String season) {
     }
 }
