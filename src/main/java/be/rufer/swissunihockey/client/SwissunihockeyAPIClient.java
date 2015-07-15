@@ -15,6 +15,8 @@
  */
 package be.rufer.swissunihockey.client;
 
+import be.rufer.swissunihockey.client.domain.ClubsResponse;
+import be.rufer.swissunihockey.client.domain.Entry;
 import be.rufer.swissunihockey.client.exception.CalendarConversionException;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
@@ -26,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Client for interaction with the <a href="https://api-v2.swissunihockey.ch/api/doc">siwssunihockey API v2</a>
@@ -42,7 +45,7 @@ public class SwissunihockeyAPIClient {
      */
     public Calendar getCalendarForTeam(String teamId) {
         HashMap<String, String> variables = new HashMap<>();
-        variables.put("TEAM_ID", teamId);
+        variables.put(UrlVariables.TEAM_ID, teamId);
         String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_TEAM, String.class, variables);
         return convertToCalendar(response);
     }
@@ -53,7 +56,7 @@ public class SwissunihockeyAPIClient {
      */
     public Calendar getCalendarForClub(String clubId) {
         HashMap<String, String> variables = new HashMap<>();
-        variables.put("CLUB_ID", clubId);
+        variables.put(UrlVariables.CLUB_ID, clubId);
         String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_CLUB, String.class, variables);
         return convertToCalendar(response);
     }
@@ -67,10 +70,10 @@ public class SwissunihockeyAPIClient {
      */
     public Calendar getCalendarForGroup(String season, String league, String gameClass, String group) {
         HashMap<String, String> variables = new HashMap<>();
-        variables.put("SEASON", season);
-        variables.put("LEAGUE", league);
-        variables.put("GAME_CLASS", gameClass);
-        variables.put("GROUP", group);
+        variables.put(UrlVariables.SEASON, season);
+        variables.put(UrlVariables.LEAGUE, league);
+        variables.put(UrlVariables.GAME_CLASS, gameClass);
+        variables.put(UrlVariables.GROUP, group);
         String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_GROUP, String.class, variables);
         return convertToCalendar(response);
     }
@@ -83,5 +86,20 @@ public class SwissunihockeyAPIClient {
         } catch (IOException | ParserException e) {
             throw new CalendarConversionException();
         }
+    }
+
+    public Map<String, String> getClubsOfSeason(String season) {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put(UrlVariables.SEASON, season);
+        ClubsResponse response = restTemplate.getForObject(UrlTemplates.GET_CLUBS_OF_SEASON, ClubsResponse.class, variables);
+        return getClubsMap(response);
+    }
+
+    private Map<String, String> getClubsMap(ClubsResponse response) {
+        Map<String, String> clubs = new HashMap<>();
+        for (Entry entry : response.getEntries()) {
+            clubs.put(entry.getContext().getClubId(), entry.getText());
+        }
+        return clubs;
     }
 }
