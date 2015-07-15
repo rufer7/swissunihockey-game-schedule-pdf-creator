@@ -55,6 +55,7 @@
         <webjars.ionic.version>1.0.0-beta.14</webjars.ionic.version>
         <lombok.version>1.16.4</lombok.version>
         <ical4j.version>1.0.2</ical4j.version>
+        <apache.pdf.box.version>1.1.0</apache.pdf.box.version>
     </properties>
 
     <dependencies>
@@ -95,6 +96,11 @@
             <groupId>org.mnode.ical4j</groupId>
             <artifactId>ical4j</artifactId>
             <version>${ical4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${apache.pdf.box.version}</version>
         </dependency>
 
         <dependency>
