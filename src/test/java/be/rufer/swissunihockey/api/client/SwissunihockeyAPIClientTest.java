@@ -28,7 +28,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -39,6 +38,10 @@ public class SwissunihockeyAPIClientTest {
 
     private static final String TEAM_ID = "1";
     private static final String CLUB_ID = "9";
+    private static final String SEASON = "2015";
+    private static final String LEAGUE = "1";
+    private static final String GAME_CLASS = "11";
+    private static final String GROUP = "Gruppe 1";
     private static final String SAMPLE_CALENDAR_STRING = "BEGIN:VCALENDAR\n" +
             "VERSION:2.0\n" +
             "PRODID:icalendar-ruby\n" +
@@ -83,7 +86,7 @@ public class SwissunihockeyAPIClientTest {
     }
 
     @Test
-    public void getCalendarForClubCallsSwissunihockeyAPI() {
+    public void getCalendarForClubCallsSwissnihockeyAPI() {
         HashMap<String, String> variables = new HashMap<>();
         variables.put("CLUB_ID", CLUB_ID);
         when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables))).thenReturn(SAMPLE_CALENDAR_STRING);
@@ -110,6 +113,24 @@ public class SwissunihockeyAPIClientTest {
 
     @Test
     public void getCalendarForGroupCallsSwissunihockeyAPI() {
-//        To get a calendar for a group, use season, league, game_class and group arguments.
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("SEASON", SEASON);
+        variables.put("LEAGUE", LEAGUE);
+        variables.put("GAME_CLASS", GAME_CLASS);
+        variables.put("GROUP", GROUP);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALNEDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn(SAMPLE_CALENDAR_STRING);
+        swissunihockeyAPIClient.getCalendarForGroup(SEASON, LEAGUE, GAME_CLASS, GROUP);
+        verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALNEDAR_FOR_GROUP), eq(String.class), eq(variables));
+    }
+
+    @Test(expected = CalendarConversionException.class)
+    public void getCalendarForGroupThrowsCalendarConversionExceptionForInvalidResponse() {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("SEASON", SEASON);
+        variables.put("LEAGUE", LEAGUE);
+        variables.put("GAME_CLASS", GAME_CLASS);
+        variables.put("GROUP", GROUP);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALNEDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn("");
+        swissunihockeyAPIClient.getCalendarForGroup(SEASON, LEAGUE, GAME_CLASS, GROUP);
     }
 }

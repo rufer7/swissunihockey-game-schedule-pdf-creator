@@ -58,6 +58,23 @@ public class SwissunihockeyAPIClient {
         return convertToCalendar(response);
     }
 
+    /**
+     * @param season the season (i.e. 2015 for season 2015/2016)
+     * @param league the id of the league (i.e. 1 for HNLA)
+     * @param gameClass the class of the games (i.e. 11 for HNLA group 1)
+     * @param group the group (i.e. Gruppe 1)
+     * @return events from the group and the season indicated
+     */
+    public Calendar getCalendarForGroup(String season, String league, String gameClass, String group) {
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("SEASON", season);
+        variables.put("LEAGUE", league);
+        variables.put("GAME_CLASS", gameClass);
+        variables.put("GROUP", group);
+        String response = restTemplate.getForObject(UrlTemplates.GET_CALNEDAR_FOR_GROUP, String.class, variables);
+        return convertToCalendar(response);
+    }
+
     private Calendar convertToCalendar(String response) {
         StringReader reader = new StringReader(response);
         CalendarBuilder builder = new CalendarBuilder();

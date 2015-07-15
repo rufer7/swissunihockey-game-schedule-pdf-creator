@@ -19,4 +19,5 @@ public interface UrlTemplates {
 
     String GET_CALENDAR_FOR_TEAM = "http://api-v2.swissunihockey.ch/api/calendars?team_id={TEAM_ID}";
     String GET_CALENDAR_FOR_CLUB = "http://api-v2.swissunihockey.ch/api/calendars?club_id={CLUB_ID}";
+    String GET_CALNEDAR_FOR_GROUP = "http://api-v2.swissunihockey.ch/api/calendars?season={SEASON}&league={LEAGUE}&game_class={GAME_CLASS}&group={GROUP}";
 }
