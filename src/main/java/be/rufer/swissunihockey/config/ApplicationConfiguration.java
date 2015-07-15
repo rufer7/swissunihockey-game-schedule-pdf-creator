@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.rufer.swissunihockey.client.domain;
+package be.rufer.swissunihockey.config;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class EntryContext {
+@Configuration
+public class ApplicationConfiguration {
 
-    @JsonProperty("club_id")
-    private String clubId;
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

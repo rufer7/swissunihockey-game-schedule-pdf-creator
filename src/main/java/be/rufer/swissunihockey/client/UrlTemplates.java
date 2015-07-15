@@ -17,9 +17,9 @@ package be.rufer.swissunihockey.client;
 
 public interface UrlTemplates {
 
-    String GET_CALENDAR_FOR_TEAM = "http://api-v2.swissunihockey.ch/api/calendars?team_id={TEAM_ID}";
-    String GET_CALENDAR_FOR_CLUB = "http://api-v2.swissunihockey.ch/api/calendars?club_id={CLUB_ID}";
-    String GET_CALENDAR_FOR_GROUP = "http://api-v2.swissunihockey.ch/api/calendars?season={SEASON}&league={LEAGUE}&game_class={GAME_CLASS}&group={GROUP}";
-    String GET_CLUBS_OF_SEASON = "http://api-v2.swissunihockey.ch/api/clubs?season={SEASON}";
-    String GET_LEAGUES = "http://api-v2.swissunihockey.ch/api/games?mode=list";
+    String GET_CALENDAR_FOR_TEAM = "https://api-v2.swissunihockey.ch/api/calendars?team_id={TEAM_ID}";
+    String GET_CALENDAR_FOR_CLUB = "https://api-v2.swissunihockey.ch/api/calendars?club_id={CLUB_ID}";
+    String GET_CALENDAR_FOR_GROUP = "https://api-v2.swissunihockey.ch/api/calendars?season={SEASON}&league={LEAGUE}&game_class={GAME_CLASS}&group={GROUP}";
+    String GET_CLUBS_OF_SEASON = "https://api-v2.swissunihockey.ch/api/clubs?season={SEASON}";
+    String GET_LEAGUES = "https://api-v2.swissunihockey.ch/api/games?mode=list";
 }
