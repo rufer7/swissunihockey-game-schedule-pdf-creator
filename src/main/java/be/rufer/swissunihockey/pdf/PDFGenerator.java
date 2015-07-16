@@ -18,6 +18,7 @@ package be.rufer.swissunihockey.pdf;
 import be.rufer.swissunihockey.pdf.exception.PDFCreationException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -36,9 +37,15 @@ import java.time.Instant;
  */
 public class PDFGenerator {
 
-    public static final int TITLE_FONT_SIZE = 14;
     private static final Logger LOG = LoggerFactory.getLogger(PDFGenerator.class);
-    public static final int CONTENT_FONT_SIZE = 10;
+    private static final int TITLE_FONT_SIZE = 14;
+    private static final int OVERVIEW_FONT_SIZE = 12;
+    private static final int CONTENT_FONT_SIZE = 10;
+    private static final int X_ALIGNMENT = 50;
+    private static final int Y_ALIGNMENT_TITLE = 700;
+    private static final int LINE_DISTANCE = 10;
+    private static final int Y_ALIGNMENT_GAMES = 600;
+    private static final int Y_ALIGNMENT_OVERVIEW = 650;
     private PDFont font;
 
     public PDFGenerator() {
@@ -60,10 +67,10 @@ public class PDFGenerator {
         try {
             contentStream = new PDPageContentStream(document, page);
 
-            contentStream.beginText();
             writeTitle(contentStream, PDFTemplates.TEAM_SCHEDULE_TITLE, teamName);
+            writeTeamOverview(contentStream, calendar);
             writeTeamCalendarContent(contentStream, calendar);
-            contentStream.endText();
+
             contentStream.close();
 
             document.save(fileName);
@@ -79,27 +86,52 @@ public class PDFGenerator {
         return fileName;
     }
 
+    private void writeTeamOverview(PDPageContentStream contentStream, Calendar calendar) throws IOException {
+        contentStream.setFont(font, OVERVIEW_FONT_SIZE);
+        contentStream.beginText();
+        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_OVERVIEW);
+        Property property = ((Component)calendar.getComponents().iterator().next()).getProperties().getProperty(Property.DESCRIPTION);
+        // TODO write overview and remove "Runde x" and "\" from string
+        //contentStream.drawString(property.getValue().replaceAll());
+        contentStream.endText();
+    }
+
     private void writeTitle(PDPageContentStream contentStream, String template, String... templateVariables) throws IOException {
         contentStream.setFont(font, TITLE_FONT_SIZE);
-        contentStream.moveTextPositionByAmount(100, 700);
+        contentStream.beginText();
+        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_TITLE);
         contentStream.drawString(String.format(template, templateVariables));
+        contentStream.endText();
     }
 
     private void writeTeamCalendarContent(PDPageContentStream contentStream, Calendar calendar) throws IOException {
         LOG.info("Start writing calendar content to content stream...");
         contentStream.setFont(font, CONTENT_FONT_SIZE);
 
-        int yPosition = 700;
+        int yPosition = Y_ALIGNMENT_GAMES;
 
         for (Object component : calendar.getComponents()) {
-            yPosition += 20;
-            contentStream.moveTextPositionByAmount(100, yPosition);
             PropertyList properties = ((Component)component).getProperties();
 
-//            properties.getProperty(Property.DTSTART),
-//            properties.getProperty(Property.DESCRIPTION),
-//            properties.getProperty(Property.SUMMARY),
-//            properties.getProperty(Property.LOCATION)));
+            // TODO handle cases with long strings (eventually Querformat?)
+            contentStream.beginText();
+            contentStream.moveTextPositionByAmount(X_ALIGNMENT, yPosition);
+            contentStream.drawString(properties.getProperty(Property.DTSTART).getValue());
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 50, yPosition);
+            contentStream.drawString(properties.getProperty(Property.DESCRIPTION).getValue());
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 100, yPosition);
+            contentStream.drawString(properties.getProperty(Property.SUMMARY).getValue());
+            contentStream.endText();
+            contentStream.beginText();
+            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 150, yPosition);
+            contentStream.drawString(properties.getProperty(Property.LOCATION).getValue());
+            contentStream.endText();
+
+            yPosition -= LINE_DISTANCE;
         }
 
         LOG.info("Calendar data successfully written to content stream");
