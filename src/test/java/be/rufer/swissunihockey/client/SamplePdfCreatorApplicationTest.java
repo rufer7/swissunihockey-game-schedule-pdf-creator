@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class SamplePdfCreatorApplicationTest {
 
     @Autowired
-    SwissunihockeyAPIClient apiClient;
+    private SwissunihockeyAPIClient apiClient;
 
     @Test
     public void testMethod() {
