@@ -15,9 +15,7 @@
  */
 package be.rufer.swissunihockey.client;
 
-import be.rufer.swissunihockey.client.domain.ClubsResponse;
-import be.rufer.swissunihockey.client.domain.ClubEntry;
-import be.rufer.swissunihockey.client.domain.ClubEntryContext;
+import be.rufer.swissunihockey.client.domain.*;
 import be.rufer.swissunihockey.client.exception.CalendarConversionException;
 import net.fortuna.ical4j.model.Calendar;
 import org.junit.Before;
@@ -57,7 +55,8 @@ public class SwissunihockeyAPIClientTest {
             "END:VCALENDAR";
 
     private Map<String, String> variables;
-    private static ClubsResponse sampleClubResponse;
+    private static ClubsResponse sampleClubsResponse;
+    private static GamesResponse sampleGamesResponse;
 
     @Mock
     private RestTemplate mockedRestTemplate;
@@ -67,9 +66,23 @@ public class SwissunihockeyAPIClientTest {
 
     @BeforeClass
     public static void setup() {
+        initSampleClubResponse();
+        initSampleGamesResponse();
+    }
+
+    private static void initSampleGamesResponse() {
+        List<Tab> tabs = new ArrayList<>();
+        tabs.add(Tab.builder().text("HNLA").link(Link.builder().leagueEntry(LeagueEntry.builder().leagueId(1).build()).build()).build());
+        List<OtherLeagueEntry> otherLeagueEntries = new ArrayList<>();
+        otherLeagueEntries.add(OtherLeagueEntry.builder().text("Herren Aktive GF 1. Liga").leagueEntry(LeagueEntry.builder().leagueId(2).build()).build());
+        tabs.add(Tab.builder().text("andere").otherLeagueEntries(otherLeagueEntries).build());
+        sampleGamesResponse = GamesResponse.builder().gameData(GameData.builder().tabs(tabs).build()).build();
+    }
+
+    private static void initSampleClubResponse() {
         List<ClubEntry> entries = new ArrayList<>();
         entries.add(ClubEntry.builder().text("Sample Team").context(ClubEntryContext.builder().clubId("99").build()).build());
-        sampleClubResponse = ClubsResponse.builder().entries(entries).build();
+        sampleClubsResponse = ClubsResponse.builder().entries(entries).build();
     }
 
     @Before
@@ -148,23 +161,34 @@ public class SwissunihockeyAPIClientTest {
     @Test
     public void getClubsOfSeasonCallsSwissunihockeyAPI() {
         variables.put(UrlVariables.SEASON, SEASON);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CLUBS_OF_SEASON), eq(ClubsResponse.class), eq(variables))).thenReturn(sampleClubResponse);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CLUBS_OF_SEASON), eq(ClubsResponse.class), eq(variables))).thenReturn(sampleClubsResponse);
         swissunihockeyAPIClient.getClubsOfSeason(SEASON);
         verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CLUBS_OF_SEASON), eq(ClubsResponse.class), eq(variables));
     }
 
     @Test
-    public void getClubsOfSeasonReturnsHashMapContainingIdAndNameOfTheClubs() {
+    public void getClubsOfSeasonReturnsMapContainingIdAndNameOfClubs() {
         variables.put(UrlVariables.SEASON, SEASON);
         when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CLUBS_OF_SEASON), eq(ClubsResponse.class), eq(variables)))
-                .thenReturn(sampleClubResponse);
+                .thenReturn(sampleClubsResponse);
         Map<String, String> clubs = swissunihockeyAPIClient.getClubsOfSeason(SEASON);
         assertEquals(1, clubs.size());
         assertEquals("Sample Team", clubs.get("99"));
     }
 
     @Test
-    public void getLeaguesOfSeasonCallsSwissunihockeyAPI() {
-        // https://api-v2.swissunihockey.ch/api/games?mode=list
+    public void getLeaguesCallsGameEndpointOfSwissunihockeyAPI() {
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_GAMES), eq(GamesResponse.class))).thenReturn(sampleGamesResponse);
+        swissunihockeyAPIClient.getLeagues();
+        verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_GAMES), eq(GamesResponse.class));
+    }
+
+    @Test
+    public void getLeaguesReturnsMapContainingIdAndNameOfLeagues() {
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_GAMES), eq(GamesResponse.class))).thenReturn(sampleGamesResponse);
+        Map<String, String> leagues = swissunihockeyAPIClient.getLeagues();
+        assertEquals(2, leagues.size());
+        assertEquals("HNLA", leagues.get("1"));
+        assertEquals("Herren Aktive GF 1. Liga", leagues.get("2"));
     }
 }

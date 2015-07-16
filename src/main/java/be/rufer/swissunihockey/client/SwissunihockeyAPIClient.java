@@ -15,8 +15,7 @@
  */
 package be.rufer.swissunihockey.client;
 
-import be.rufer.swissunihockey.client.domain.ClubsResponse;
-import be.rufer.swissunihockey.client.domain.ClubEntry;
+import be.rufer.swissunihockey.client.domain.*;
 import be.rufer.swissunihockey.client.exception.CalendarConversionException;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
@@ -90,20 +89,42 @@ public class SwissunihockeyAPIClient {
 
     /**
      * @param season the season (i.e. 2015 for season 2015/2016)
-     * @return all clubs of the given season
+     * @return all clubs of the given season as Map (key = id, value = textual representation)
      */
     public Map<String, String> getClubsOfSeason(String season) {
         HashMap<String, String> variables = new HashMap<>();
         variables.put(UrlVariables.SEASON, season);
         ClubsResponse response = restTemplate.getForObject(UrlTemplates.GET_CLUBS_OF_SEASON, ClubsResponse.class, variables);
-        return getClubsMap(response);
+        return extractClubsToMap(response);
     }
 
-    private Map<String, String> getClubsMap(ClubsResponse response) {
+    private Map<String, String> extractClubsToMap(ClubsResponse response) {
         Map<String, String> clubs = new HashMap<>();
         for (ClubEntry clubEntry : response.getEntries()) {
             clubs.put(clubEntry.getContext().getClubId(), clubEntry.getText());
         }
         return clubs;
+    }
+
+    /**
+     * @return all leagues as Map (key = id, value = textual representation)
+     */
+    public Map<String, String> getLeagues() {
+        GamesResponse response = restTemplate.getForObject(UrlTemplates.GET_GAMES, GamesResponse.class);
+        return extractLeaguesToMap(response);
+    }
+
+    private Map<String, String> extractLeaguesToMap(GamesResponse response) {
+        Map<String, String> leagues = new HashMap<>();
+        for (Tab tab : response.getGameData().getTabs()) {
+            if (null != tab.getLink()) {
+                leagues.put(String.valueOf(tab.getLink().getLeagueEntry().getLeagueId()), tab.getText());
+            } else {
+                for (OtherLeagueEntry otherLeagueEntry : tab.getOtherLeagueEntries()) {
+                    leagues.put(String.valueOf(otherLeagueEntry.getLeagueEntry().getLeagueId()), otherLeagueEntry.getText());
+                }
+            }
+        }
+        return leagues;
     }
 }

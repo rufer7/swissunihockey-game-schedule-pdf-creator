@@ -13,13 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.rufer.swissunihockey.client;
+package be.rufer.swissunihockey.client.domain;
 
-public interface UrlTemplates {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    String GET_CALENDAR_FOR_TEAM = "https://api-v2.swissunihockey.ch/api/calendars?team_id={TEAM_ID}";
-    String GET_CALENDAR_FOR_CLUB = "https://api-v2.swissunihockey.ch/api/calendars?club_id={CLUB_ID}";
-    String GET_CALENDAR_FOR_GROUP = "https://api-v2.swissunihockey.ch/api/calendars?season={SEASON}&league={LEAGUE}&game_class={GAME_CLASS}&group={GROUP}";
-    String GET_CLUBS_OF_SEASON = "https://api-v2.swissunihockey.ch/api/clubs?season={SEASON}";
-    String GET_GAMES = "https://api-v2.swissunihockey.ch/api/games?mode=list";
+import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class GameData {
+
+    @JsonProperty("tabs")
+    private List<Tab> tabs;
 }
