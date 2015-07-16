@@ -54,9 +54,10 @@ public class SwissunihockeyAPIClientTest {
             "CALSCALE:GREGORIAN\n" +
             "END:VCALENDAR";
 
-    private Map<String, String> variables;
     private static ClubsResponse sampleClubsResponse;
     private static GamesResponse sampleGamesResponse;
+
+    private Map<String, String> variables;
 
     @Mock
     private RestTemplate mockedRestTemplate;
@@ -81,7 +82,7 @@ public class SwissunihockeyAPIClientTest {
 
     private static void initSampleClubResponse() {
         List<ClubEntry> entries = new ArrayList<>();
-        entries.add(ClubEntry.builder().text("Sample Team").context(ClubEntryContext.builder().clubId("99").build()).build());
+        entries.add(ClubEntry.builder().text("Sample Club").context(ClubEntryContext.builder().clubId("99").build()).build());
         sampleClubsResponse = ClubsResponse.builder().entries(entries).build();
     }
 
@@ -173,7 +174,7 @@ public class SwissunihockeyAPIClientTest {
                 .thenReturn(sampleClubsResponse);
         Map<String, String> clubs = swissunihockeyAPIClient.getClubsOfSeason(SEASON);
         assertEquals(1, clubs.size());
-        assertEquals("Sample Team", clubs.get("99"));
+        assertEquals("Sample Club", clubs.get("99"));
     }
 
     @Test
