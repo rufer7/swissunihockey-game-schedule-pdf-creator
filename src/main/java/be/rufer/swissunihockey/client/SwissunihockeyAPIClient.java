@@ -16,7 +16,7 @@
 package be.rufer.swissunihockey.client;
 
 import be.rufer.swissunihockey.client.domain.ClubsResponse;
-import be.rufer.swissunihockey.client.domain.Entry;
+import be.rufer.swissunihockey.client.domain.ClubEntry;
 import be.rufer.swissunihockey.client.exception.CalendarConversionException;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
@@ -97,8 +97,8 @@ public class SwissunihockeyAPIClient {
 
     private Map<String, String> getClubsMap(ClubsResponse response) {
         Map<String, String> clubs = new HashMap<>();
-        for (Entry entry : response.getEntries()) {
-            clubs.put(entry.getContext().getClubId(), entry.getText());
+        for (ClubEntry clubEntry : response.getEntries()) {
+            clubs.put(clubEntry.getContext().getClubId(), clubEntry.getText());
         }
         return clubs;
     }

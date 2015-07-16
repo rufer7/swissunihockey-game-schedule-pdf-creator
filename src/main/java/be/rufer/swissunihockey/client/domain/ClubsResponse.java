@@ -27,5 +27,5 @@ import java.util.List;
 public class ClubsResponse {
 
     @JsonProperty("entries")
-    private List<Entry> entries;
+    private List<ClubEntry> entries;
 }

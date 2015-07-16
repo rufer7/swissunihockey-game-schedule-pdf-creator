@@ -16,8 +16,8 @@
 package be.rufer.swissunihockey.client;
 
 import be.rufer.swissunihockey.client.domain.ClubsResponse;
-import be.rufer.swissunihockey.client.domain.Entry;
-import be.rufer.swissunihockey.client.domain.EntryContext;
+import be.rufer.swissunihockey.client.domain.ClubEntry;
+import be.rufer.swissunihockey.client.domain.ClubEntryContext;
 import be.rufer.swissunihockey.client.exception.CalendarConversionException;
 import net.fortuna.ical4j.model.Calendar;
 import org.junit.Before;
@@ -67,8 +67,8 @@ public class SwissunihockeyAPIClientTest {
 
     @BeforeClass
     public static void setup() {
-        List<Entry> entries = new ArrayList<>();
-        entries.add(Entry.builder().text("Sample Team").context(EntryContext.builder().clubId("99").build()).build());
+        List<ClubEntry> entries = new ArrayList<>();
+        entries.add(ClubEntry.builder().text("Sample Team").context(ClubEntryContext.builder().clubId("99").build()).build());
         sampleClubResponse = ClubsResponse.builder().entries(entries).build();
     }
 

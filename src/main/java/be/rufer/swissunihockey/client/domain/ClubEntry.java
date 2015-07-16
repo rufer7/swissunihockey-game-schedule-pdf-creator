@@ -22,11 +22,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Entry {
+public class ClubEntry {
 
     @JsonProperty("text")
     private String text;
 
     @JsonProperty("set_in_context")
-    private EntryContext context;
+    private ClubEntryContext context;
 }
