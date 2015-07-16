@@ -38,7 +38,7 @@ public class PDFGenerator {
 
     public static final int TITLE_FONT_SIZE = 14;
     private static final Logger LOG = LoggerFactory.getLogger(PDFGenerator.class);
-    public static final int CONTENT_FONT_SIZE = 12;
+    public static final int CONTENT_FONT_SIZE = 10;
     private PDFont font;
 
     public PDFGenerator() {
