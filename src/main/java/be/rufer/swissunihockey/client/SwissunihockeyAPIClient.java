@@ -88,6 +88,10 @@ public class SwissunihockeyAPIClient {
         }
     }
 
+    /**
+     * @param season the season (i.e. 2015 for season 2015/2016)
+     * @return all clubs of the given season
+     */
     public Map<String, String> getClubsOfSeason(String season) {
         HashMap<String, String> variables = new HashMap<>();
         variables.put(UrlVariables.SEASON, season);
