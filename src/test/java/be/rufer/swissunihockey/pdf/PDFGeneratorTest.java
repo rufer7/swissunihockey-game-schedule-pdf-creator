@@ -19,11 +19,12 @@ import net.fortuna.ical4j.model.Calendar;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sun.misc.Launcher;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 

@@ -15,7 +15,6 @@
  */
 package be.rufer.swissunihockey;
 
-import be.rufer.swissunihockey.PdfCreatorApplication;
 import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +31,7 @@ public class SamplePdfCreatorApplicationTest {
 
     @Test
     public void testMethod() {
-
+        //apiClient.getCalendarForClub("334");
+        //apiClient.getCalendarForTeam("428977");
     }
 }

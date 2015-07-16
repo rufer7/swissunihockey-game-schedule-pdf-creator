@@ -19,7 +19,6 @@ import be.rufer.swissunihockey.pdf.exception.PDFCreationException;
 import net.fortuna.ical4j.model.Calendar;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
@@ -29,14 +28,15 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.util.Date;
 
 /**
  * Generator class that provides methods for creation of PDF documents.
  */
 public class PDFGenerator {
 
+    public static final int TITLE_FONT_SIZE = 14;
     private static final Logger LOG = LoggerFactory.getLogger(PDFGenerator.class);
+    public static final int CONTENT_FONT_SIZE = 12;
     private PDFont font;
 
     public PDFGenerator() {
@@ -55,16 +55,14 @@ public class PDFGenerator {
 
         String fileName = generateUniqueFileName(clubName);
 
-        PDPageContentStream contentStream = null;
+        PDPageContentStream contentStream;
         try {
             contentStream = new PDPageContentStream(document, page);
 
             contentStream.beginText();
-            contentStream.setFont(font, 12);
-            contentStream.moveTextPositionByAmount(100, 700);
-            contentStream.drawString("Hello World");
+            writeTitle(contentStream, PDFTemplates.CLUB_SCHEDULE_TITLE, clubName);
+            writeClubCalendarContent(contentStream, calendar);
             contentStream.endText();
-
             contentStream.close();
 
             document.save(fileName);
@@ -78,6 +76,28 @@ public class PDFGenerator {
         }
 
         return fileName;
+    }
+
+    private void writeTitle(PDPageContentStream contentStream, String template, String... templateVariables) throws IOException {
+        contentStream.setFont(font, TITLE_FONT_SIZE);
+        contentStream.moveTextPositionByAmount(100, 700);
+        contentStream.drawString(String.format(template, templateVariables));
+    }
+
+    private void writeClubCalendarContent(PDPageContentStream contentStream, Calendar calendar) throws IOException {
+        LOG.info("Start writing calendar content to content stream...");
+        contentStream.setFont(font, CONTENT_FONT_SIZE);
+
+//        DTSTART:20150809T190000
+//        DTEND:20150809T204500
+//        DESCRIPTION:Schweizer Cup Damen 1/32-Final\, Saison 2015/16
+//        LOCATION:Sportzentrum Zuchwil AG SSZ Zuchwil
+//        SUMMARY:UHC Oekingen - Ad Astra Sarnen
+
+        contentStream.moveTextPositionByAmount(100, 720);
+
+
+        LOG.info("Calendar data successfully written to content stream");
     }
 
     protected String generateUniqueFileName(String prefix) {
