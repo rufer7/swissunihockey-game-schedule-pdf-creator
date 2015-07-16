@@ -17,5 +17,5 @@ package be.rufer.swissunihockey.pdf;
 
 public interface PDFTemplates {
 
-    String CLUB_SCHEDULE_TITLE = "Spielplan - %s";
+    String TEAM_SCHEDULE_TITLE = "Spielplan - %s";
 }

@@ -17,6 +17,8 @@ package be.rufer.swissunihockey.pdf;
 
 import be.rufer.swissunihockey.pdf.exception.PDFCreationException;
 import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.PropertyList;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -43,25 +45,24 @@ public class PDFGenerator {
         font = PDType1Font.HELVETICA_BOLD;
     }
 
-    public String createPDFBasedCalendarForClub(Calendar clubCalendar, String clubName) {
+    public String createPDFBasedCalendarForTeam(Calendar teamCalendar, String teamName) {
         PDDocument document = new PDDocument();
+        return writeTeamCalendarToPDFAndSave(document, teamCalendar, teamName);
+    }
+
+    private String writeTeamCalendarToPDFAndSave(PDDocument document, Calendar calendar, String teamName) {
         PDPage page = new PDPage();
         document.addPage(page);
 
-        return writeClubCalendarToPDFAndSave(document, page, clubCalendar, clubName);
-    }
-
-    private String writeClubCalendarToPDFAndSave(PDDocument document, PDPage page, Calendar calendar, String clubName) {
-
-        String fileName = generateUniqueFileName(clubName);
+        String fileName = generateUniqueFileName(teamName);
 
         PDPageContentStream contentStream;
         try {
             contentStream = new PDPageContentStream(document, page);
 
             contentStream.beginText();
-            writeTitle(contentStream, PDFTemplates.CLUB_SCHEDULE_TITLE, clubName);
-            writeClubCalendarContent(contentStream, calendar);
+            writeTitle(contentStream, PDFTemplates.TEAM_SCHEDULE_TITLE, teamName);
+            writeTeamCalendarContent(contentStream, calendar);
             contentStream.endText();
             contentStream.close();
 
@@ -84,18 +85,22 @@ public class PDFGenerator {
         contentStream.drawString(String.format(template, templateVariables));
     }
 
-    private void writeClubCalendarContent(PDPageContentStream contentStream, Calendar calendar) throws IOException {
+    private void writeTeamCalendarContent(PDPageContentStream contentStream, Calendar calendar) throws IOException {
         LOG.info("Start writing calendar content to content stream...");
         contentStream.setFont(font, CONTENT_FONT_SIZE);
 
-//        DTSTART:20150809T190000
-//        DTEND:20150809T204500
-//        DESCRIPTION:Schweizer Cup Damen 1/32-Final\, Saison 2015/16
-//        LOCATION:Sportzentrum Zuchwil AG SSZ Zuchwil
-//        SUMMARY:UHC Oekingen - Ad Astra Sarnen
+        int yPosition = 700;
 
-        contentStream.moveTextPositionByAmount(100, 720);
+        for (Object component : calendar.getComponents()) {
+            yPosition += 20;
+            contentStream.moveTextPositionByAmount(100, yPosition);
+            PropertyList properties = ((Component)component).getProperties();
 
+//            properties.getProperty(Property.DTSTART),
+//            properties.getProperty(Property.DESCRIPTION),
+//            properties.getProperty(Property.SUMMARY),
+//            properties.getProperty(Property.LOCATION)));
+        }
 
         LOG.info("Calendar data successfully written to content stream");
     }

@@ -15,24 +15,33 @@
  */
 package be.rufer.swissunihockey.pdf;
 
+import net.fortuna.ical4j.data.CalendarBuilder;
+import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class PDFGeneratorTest {
 
-    public static final String SAMPLE_CLUB_NAME = "Sample Club";
+    private static final String SAMPLE_TEAM_NAME = "Sample Team";
+    private static Calendar sampleTeamCalendar;
     private PDFGenerator pdfGenerator;
     private String fileName;
+
+    @BeforeClass
+    public static void setup() throws IOException, ParserException {
+        InputStream inputStream = new FileInputStream(new File(PDFGeneratorTest.class.getClassLoader().getResource("team-calendar-response.txt").getFile()));
+        CalendarBuilder builder = new CalendarBuilder();
+        sampleTeamCalendar = builder.build(inputStream);
+    }
 
     @Before
     public void init() {
@@ -42,18 +51,19 @@ public class PDFGeneratorTest {
     @After
     public void cleanup() {
         File file = new File("./" + fileName);
-        file.delete();
+        boolean result = file.delete();
+        assertTrue(result);
     }
 
     @Test
-    public void createPDFBasedCalendarForClubReturnsFileName() {
-        fileName = pdfGenerator.createPDFBasedCalendarForClub(new Calendar(), SAMPLE_CLUB_NAME);
-        assertTrue(fileName.contains(SAMPLE_CLUB_NAME));
+    public void createPDFBasedCalendarForTeamReturnsFileName() {
+        fileName = pdfGenerator.createPDFBasedCalendarForTeam(sampleTeamCalendar, SAMPLE_TEAM_NAME);
+        assertTrue(fileName.contains(SAMPLE_TEAM_NAME));
     }
 
     @Test
-    public void createPDFBasedCalendarForClubCreatesPDFDocument() throws IOException {
-        fileName = pdfGenerator.createPDFBasedCalendarForClub(new Calendar(), SAMPLE_CLUB_NAME);
+    public void createPDFBasedCalendarForTeamCreatesPDFDocument() throws IOException {
+        fileName = pdfGenerator.createPDFBasedCalendarForTeam(sampleTeamCalendar, SAMPLE_TEAM_NAME);
         InputStream inputStream = new FileInputStream("./" + fileName);
         assertNotNull(inputStream);
         inputStream.close();
