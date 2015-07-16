@@ -13,17 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.rufer.swissunihockey.config;
+package be.rufer.swissunihockey.client;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
+import be.rufer.swissunihockey.PdfCreatorApplication;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@Configuration
-public class ApplicationConfiguration {
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = PdfCreatorApplication.class)
+public class SamplePdfCreatorApplicationTest {
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+    @Autowired
+    SwissunihockeyAPIClient apiClient;
+
+    @Test
+    public void testMethod() {
+
     }
 }

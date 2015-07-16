@@ -46,7 +46,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>be.rufer.swissunihockey.Application</start-class>
+        <start-class>be.rufer.swissunihockey.PdfCreatorApplication</start-class>
         <java.version>1.8</java.version>
 
         <webjars.bootstrap.version>3.3.4</webjars.bootstrap.version>
@@ -136,6 +136,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.2.201409121644</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/PdfCreatorApplication.class</exclude>
+                        <exclude>**/PdfCreatorConfiguration.class</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
