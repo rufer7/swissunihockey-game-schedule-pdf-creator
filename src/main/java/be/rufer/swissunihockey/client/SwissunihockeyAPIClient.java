@@ -96,6 +96,7 @@ public class SwissunihockeyAPIClient {
         try {
             calendar = builder.build(reader);
         } catch (IOException | ParserException e) {
+            LOG.error("Error occured while converting calendar response to calendar object", e);
             throw new CalendarConversionException();
         }
         LOG.info("Conversion successfully completed");
