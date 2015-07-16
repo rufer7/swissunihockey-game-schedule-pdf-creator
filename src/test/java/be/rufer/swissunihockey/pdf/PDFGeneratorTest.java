@@ -16,24 +16,45 @@
 package be.rufer.swissunihockey.pdf;
 
 import net.fortuna.ical4j.model.Calendar;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.misc.Launcher;
 
+import java.io.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class PDFGeneratorTest {
 
     public static final String SAMPLE_CLUB_NAME = "Sample Club";
     private PDFGenerator pdfGenerator;
+    private String fileName;
 
     @Before
     public void init() {
         pdfGenerator = new PDFGenerator();
     }
 
+    @After
+    public void cleanup() {
+        File file = new File("./" + fileName);
+        file.delete();
+    }
+
     @Test
     public void createPDFBasedCalendarForClubReturnsFileName() {
-        String fileName = pdfGenerator.createPDFBasedCalendarForClub(new Calendar(), SAMPLE_CLUB_NAME);
+        fileName = pdfGenerator.createPDFBasedCalendarForClub(new Calendar(), SAMPLE_CLUB_NAME);
         assertTrue(fileName.contains(SAMPLE_CLUB_NAME));
+    }
+
+    @Test
+    public void createPDFBasedCalendarForClubCreatesPDFDocument() throws IOException {
+        fileName = pdfGenerator.createPDFBasedCalendarForClub(new Calendar(), SAMPLE_CLUB_NAME);
+        InputStream inputStream = new FileInputStream("./" + fileName);
+        assertNotNull(inputStream);
+        inputStream.close();
     }
 }
