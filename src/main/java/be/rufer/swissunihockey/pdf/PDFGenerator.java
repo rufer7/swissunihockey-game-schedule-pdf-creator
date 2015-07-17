@@ -46,6 +46,7 @@ public class PDFGenerator {
     private static final int LINE_DISTANCE = 10;
     private static final int Y_ALIGNMENT_GAMES = 650;
     private static final int Y_ALIGNMENT_OVERVIEW = 670;
+    private static final int ROTATION = 90;
     private PDFont font;
 
     public PDFGenerator() {
@@ -54,11 +55,18 @@ public class PDFGenerator {
 
     public String createPDFBasedCalendarForTeam(Calendar teamCalendar, String teamName) {
         PDDocument document = new PDDocument();
-        return writeTeamCalendarToPDFAndSave(document, teamCalendar, teamName);
+        try {
+            return writeTeamCalendarToPDFAndSave(document, teamCalendar, teamName);
+        } catch (IOException e) {
+            LOG.error("Error occurred while closing document", e);
+            throw new PDFCreationException();
+        }
     }
 
-    private String writeTeamCalendarToPDFAndSave(PDDocument document, Calendar calendar, String teamName) {
+    private String writeTeamCalendarToPDFAndSave(PDDocument document, Calendar calendar, String teamName) throws IOException {
         PDPage page = new PDPage();
+        page.setMediaBox(PDPage.PAGE_SIZE_A4);
+        page.setRotation(ROTATION);
         document.addPage(page);
 
         String fileName = generateUniqueFileName(teamName);
@@ -66,23 +74,21 @@ public class PDFGenerator {
         PDPageContentStream contentStream;
         try {
             contentStream = new PDPageContentStream(document, page);
-
             writeTitle(contentStream, PDFTemplates.TEAM_SCHEDULE_TITLE, teamName);
             writeTeamOverview(contentStream, calendar);
             writeTeamCalendarContent(contentStream, calendar);
-
             contentStream.close();
 
             document.save(fileName);
-            document.close();
         } catch (IOException e) {
             LOG.error("Error occurred while creating PDF document", e);
             throw new PDFCreationException();
         } catch (COSVisitorException e) {
             LOG.error("Error occurred while saving the PDF document", e);
             throw new PDFCreationException();
+        } finally {
+            document.close();
         }
-
         return fileName;
     }
 
@@ -117,16 +123,10 @@ public class PDFGenerator {
             contentStream.beginText();
             contentStream.moveTextPositionByAmount(X_ALIGNMENT, yPosition);
             contentStream.drawString(properties.getProperty(Property.DTSTART).getValue());
-            contentStream.endText();
-            contentStream.beginText();
-            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 50, yPosition);
+            contentStream.moveTextPositionByAmount(0, 50);
             contentStream.drawString(properties.getProperty(Property.DESCRIPTION).getValue());
-            contentStream.endText();
-            contentStream.beginText();
-            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 100, yPosition);
+            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 100, 50);
             contentStream.drawString(properties.getProperty(Property.SUMMARY).getValue());
-            contentStream.endText();
-            contentStream.beginText();
             contentStream.moveTextPositionByAmount(X_ALIGNMENT + 150, yPosition);
             contentStream.drawString(properties.getProperty(Property.LOCATION).getValue());
             contentStream.endText();
