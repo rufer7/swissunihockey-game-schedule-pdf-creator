@@ -30,7 +30,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 
 /**
  * Generator class that provides methods for creation of PDF documents.
@@ -42,11 +45,14 @@ public class PDFGenerator {
     private static final int OVERVIEW_FONT_SIZE = 12;
     private static final int CONTENT_FONT_SIZE = 10;
     private static final int X_ALIGNMENT = 50;
-    private static final int Y_ALIGNMENT_TITLE = 700;
-    private static final int LINE_DISTANCE = 10;
-    private static final int Y_ALIGNMENT_GAMES = 650;
-    private static final int Y_ALIGNMENT_OVERVIEW = 670;
+    private static final int Y_ALIGNMENT_TITLE = 550;
+    private static final int Y_ALIGNMENT_GAMES = 490;
+    private static final int Y_ALIGNMENT_OVERVIEW = 520;
+    private static final int LINE_DISTANCE = 15;
     private static final int ROTATION = 90;
+    public static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss";
+    public static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy";
+    public static final int ZERO = 0;
     private PDFont font;
 
     public PDFGenerator() {
@@ -74,11 +80,13 @@ public class PDFGenerator {
         PDPageContentStream contentStream;
         try {
             contentStream = new PDPageContentStream(document, page);
+            contentStream.concatenate2CTM(ZERO, 1, -1, ZERO, page.findMediaBox().getWidth(), ZERO);
+
             writeTitle(contentStream, PDFTemplates.TEAM_SCHEDULE_TITLE, teamName);
             writeTeamOverview(contentStream, calendar);
             writeTeamCalendarContent(contentStream, calendar);
-            contentStream.close();
 
+            contentStream.close();
             document.save(fileName);
         } catch (IOException e) {
             LOG.error("Error occurred while creating PDF document", e);
@@ -119,15 +127,15 @@ public class PDFGenerator {
         for (Object component : calendar.getComponents()) {
             PropertyList properties = ((Component)component).getProperties();
 
-            // TODO handle cases with long strings (eventually Querformat?)
             contentStream.beginText();
             contentStream.moveTextPositionByAmount(X_ALIGNMENT, yPosition);
-            contentStream.drawString(properties.getProperty(Property.DTSTART).getValue());
-            contentStream.moveTextPositionByAmount(0, 50);
-            contentStream.drawString(properties.getProperty(Property.DESCRIPTION).getValue());
-            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 100, 50);
-            contentStream.drawString(properties.getProperty(Property.SUMMARY).getValue());
-            contentStream.moveTextPositionByAmount(X_ALIGNMENT + 150, yPosition);
+            contentStream.drawString(formatDate(properties.getProperty(Property.DTSTART).getValue()));
+            String summary = properties.getProperty(Property.SUMMARY).getValue();
+            contentStream.moveTextPositionByAmount(60, ZERO);
+            contentStream.drawString(summary.substring(0, summary.indexOf(" - ")));
+            contentStream.moveTextPositionByAmount(250, ZERO);
+            contentStream.drawString(summary.substring(summary.indexOf(" - ") + 3));
+            contentStream.moveTextPositionByAmount(250, ZERO);
             contentStream.drawString(properties.getProperty(Property.LOCATION).getValue());
             contentStream.endText();
 
@@ -135,6 +143,18 @@ public class PDFGenerator {
         }
 
         LOG.info("Calendar data successfully written to content stream");
+    }
+
+    private String formatDate(String dateAsString) {
+        SimpleDateFormat gameScheduleDateFormat = new SimpleDateFormat(GAME_SCHEDULE_DATE_FORMAT);
+        Date date;
+        try {
+            date = new SimpleDateFormat(CALENDAR_DATE_FORMAT).parse(dateAsString);
+        } catch (ParseException e) {
+            LOG.error("Error occurred while parsing string representation of date: {}", dateAsString);
+            throw new PDFCreationException();
+        }
+        return gameScheduleDateFormat.format(date);
     }
 
     protected String generateUniqueFileName(String prefix) {
