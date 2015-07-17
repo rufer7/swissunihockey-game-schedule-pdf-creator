@@ -51,7 +51,7 @@ public class PDFGenerator {
     private static final int LINE_DISTANCE = 15;
     private static final int ROTATION = 90;
     public static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss";
-    public static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy";
+    public static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy HH:mm";
     public static final int ZERO = 0;
     private PDFont font;
 
@@ -131,17 +131,16 @@ public class PDFGenerator {
             contentStream.moveTextPositionByAmount(X_ALIGNMENT, yPosition);
             contentStream.drawString(formatDate(properties.getProperty(Property.DTSTART).getValue()));
             String summary = properties.getProperty(Property.SUMMARY).getValue();
-            contentStream.moveTextPositionByAmount(60, ZERO);
+            contentStream.moveTextPositionByAmount(100, ZERO);
             contentStream.drawString(summary.substring(0, summary.indexOf(" - ")));
-            contentStream.moveTextPositionByAmount(250, ZERO);
+            contentStream.moveTextPositionByAmount(230, ZERO);
             contentStream.drawString(summary.substring(summary.indexOf(" - ") + 3));
-            contentStream.moveTextPositionByAmount(250, ZERO);
+            contentStream.moveTextPositionByAmount(230, ZERO);
             contentStream.drawString(properties.getProperty(Property.LOCATION).getValue());
             contentStream.endText();
 
             yPosition -= LINE_DISTANCE;
         }
-
         LOG.info("Calendar data successfully written to content stream");
     }
 
