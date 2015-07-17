@@ -44,8 +44,8 @@ public class PDFGenerator {
     private static final int X_ALIGNMENT = 50;
     private static final int Y_ALIGNMENT_TITLE = 700;
     private static final int LINE_DISTANCE = 10;
-    private static final int Y_ALIGNMENT_GAMES = 600;
-    private static final int Y_ALIGNMENT_OVERVIEW = 650;
+    private static final int Y_ALIGNMENT_GAMES = 650;
+    private static final int Y_ALIGNMENT_OVERVIEW = 670;
     private PDFont font;
 
     public PDFGenerator() {
@@ -91,8 +91,8 @@ public class PDFGenerator {
         contentStream.beginText();
         contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_OVERVIEW);
         Property property = ((Component)calendar.getComponents().iterator().next()).getProperties().getProperty(Property.DESCRIPTION);
-        // TODO write overview and remove "Runde x" and "\" from string
-        //contentStream.drawString(property.getValue().replaceAll());
+        String overviewText = property.getValue().replace("\\", "").replaceAll("Runde\\s+\\d,+\\s", "");
+        contentStream.drawString(overviewText);
         contentStream.endText();
     }
 
