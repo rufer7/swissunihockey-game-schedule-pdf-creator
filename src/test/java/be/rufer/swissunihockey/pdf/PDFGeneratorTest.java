@@ -48,12 +48,12 @@ public class PDFGeneratorTest {
         pdfGenerator = new PDFGenerator();
     }
 
-//    @After
-//    public void cleanup() {
-//        File file = new File("./" + fileName);
-//        boolean result = file.delete();
-//        assertTrue(result);
-//    }
+    @After
+    public void cleanup() {
+        File file = new File("./" + fileName);
+        boolean result = file.delete();
+        assertTrue(result);
+    }
 
     @Test
     public void createPDFBasedCalendarForTeamReturnsFileName() {
