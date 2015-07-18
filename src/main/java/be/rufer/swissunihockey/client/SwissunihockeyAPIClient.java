@@ -89,7 +89,7 @@ public class SwissunihockeyAPIClient {
 
     private Calendar convertToCalendar(String response) {
         /**
-         * Workaround to fix bug of swissunihockey API
+         * Workaround to fix bug of swissunihockey API v2
          */
         response = response.replace("GEO:0.0", "GEO:0.0;0.0");
 
