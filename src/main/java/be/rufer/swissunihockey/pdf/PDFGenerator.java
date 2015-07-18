@@ -28,6 +28,7 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -38,6 +39,7 @@ import java.util.Date;
 /**
  * Generator class that provides methods for creation of PDF documents.
  */
+@Service
 public class PDFGenerator {
 
     private static final Logger LOG = LoggerFactory.getLogger(PDFGenerator.class);
@@ -50,10 +52,10 @@ public class PDFGenerator {
     private static final int Y_ALIGNMENT_OVERVIEW = 520;
     private static final int LINE_DISTANCE = 15;
     private static final int ROTATION = 90;
-    public static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss";
-    public static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy HH:mm";
-    public static final int ZERO = 0;
-    private PDFont font;
+    private static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss";
+    private static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy HH:mm";
+    private static final int ZERO = 0;
+    private static PDFont font;
 
     public PDFGenerator() {
         font = PDType1Font.HELVETICA_BOLD;

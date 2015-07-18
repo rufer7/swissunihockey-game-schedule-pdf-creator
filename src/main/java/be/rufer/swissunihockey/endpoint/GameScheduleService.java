@@ -16,6 +16,8 @@
 package be.rufer.swissunihockey.endpoint;
 
 import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
+import be.rufer.swissunihockey.pdf.PDFGenerator;
+import net.fortuna.ical4j.model.Calendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.util.Calendar;
 import java.util.Map;
 
 @Service
@@ -36,15 +37,17 @@ public class GameScheduleService {
     @Autowired
     private SwissunihockeyAPIClient swissunihockeyAPIClient;
 
+    @Autowired
+    private PDFGenerator pdfGenerator;
+
     @PostConstruct
-    public void initMaps() {
-        clubs = swissunihockeyAPIClient.getClubsOfSeason(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+    public void initClubMap() {
+        clubs = swissunihockeyAPIClient.getClubsOfSeason(String.valueOf(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)));
     }
 
     public String createPDFGameScheduleForTeam(String clubId, String teamId) {
-        // TODO return file name
-        // TODO resolve club name from id
-        return null;
+        Calendar teamCalendar = swissunihockeyAPIClient.getCalendarForTeam(teamId);
+        return pdfGenerator.createPDFBasedCalendarForTeam(teamCalendar, clubs.get(clubId));
     }
 
     public void deleteFile(String fileName) {

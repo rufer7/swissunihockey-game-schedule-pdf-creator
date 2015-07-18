@@ -17,6 +17,7 @@ package be.rufer.swissunihockey.endpoint;
 
 import be.rufer.swissunihockey.TestConstants;
 import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
+import be.rufer.swissunihockey.pdf.PDFGenerator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -32,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -47,6 +50,9 @@ public class GameScheduleServiceTest {
     @Mock
     private SwissunihockeyAPIClient swissunihockeyAPIClient;
 
+    @Mock
+    private PDFGenerator pdfGenerator;
+
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
@@ -54,7 +60,7 @@ public class GameScheduleServiceTest {
 
     @Test
     public void postConstructMethodCallsSwissunihockeyAPIClientForGettingClubsOfActualSeason() {
-        gameScheduleService.initMaps();
+        gameScheduleService.initClubMap();
         verify(swissunihockeyAPIClient).getClubsOfSeason(ACTUAL_YEAR);
     }
 
@@ -63,14 +69,29 @@ public class GameScheduleServiceTest {
         Map<String, String> clubs = new HashMap<>();
         clubs.put(TestConstants.CLUB_ID, TestConstants.CLUB_NAME);
         when(swissunihockeyAPIClient.getClubsOfSeason(ACTUAL_YEAR)).thenReturn(clubs);
-        gameScheduleService.initMaps();
+        gameScheduleService.initClubMap();
         assertNotNull(GameScheduleService.clubs);
         assertEquals(clubs, GameScheduleService.clubs);
     }
 
     @Test
     public void createPDFGameScheduleForTeamCallsSwissunihockeyAPIClientForGettingTeamsCalendar() {
-        //gameScheduleService.createPDFGameScheduleForTeam();
+        gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
+        verify(swissunihockeyAPIClient).getCalendarForTeam(TestConstants.TEAM_ID);
+    }
+
+    @Test
+    public void createPDFGameScheduleForTeamCallsPDFGeneratorWithCalendarFetchedFromAPI() {
+        initClubMap();
+        when(swissunihockeyAPIClient.getCalendarForTeam(TestConstants.TEAM_ID)).thenReturn(new net.fortuna.ical4j.model.Calendar());
+        gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
+        verify(pdfGenerator).createPDFBasedCalendarForTeam(any(net.fortuna.ical4j.model.Calendar.class), eq(TestConstants.CLUB_NAME));
+    }
+
+    private void initClubMap() {
+        Map<String, String> clubs = new HashMap<>();
+        clubs.put(TestConstants.CLUB_ID, TestConstants.CLUB_NAME);
+        GameScheduleService.clubs = clubs;
     }
 
     @Test
