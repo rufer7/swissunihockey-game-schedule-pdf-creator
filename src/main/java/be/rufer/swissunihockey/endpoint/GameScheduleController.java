@@ -53,7 +53,7 @@ public class GameScheduleController {
                     .contentType(MediaType.parseMediaType(MediaType.APPLICATION_OCTET_STREAM_VALUE))
                     .body(new InputStreamResource(pdfFile.getInputStream()));
         } catch (IOException e) {
-            LOG.error("Error occurred while loading pdf file '" + fileName + "'", e);
+            LOG.error("Error occurred while loading pdf file '" + fileName + "' from file system", e);
             throw new ServePDFException();
         } finally {
             gameScheduleService.deleteFile(fileName);
