@@ -46,7 +46,7 @@ public class PDFGenerator {
     private static final int TITLE_FONT_SIZE = 14;
     private static final int OVERVIEW_FONT_SIZE = 12;
     private static final int CONTENT_FONT_SIZE = 10;
-    private static final int X_ALIGNMENT = 50;
+    private static final int X_ALIGNMENT = 30;
     private static final int Y_ALIGNMENT_TITLE = 550;
     private static final int Y_ALIGNMENT_GAMES = 490;
     private static final int Y_ALIGNMENT_OVERVIEW = 520;
