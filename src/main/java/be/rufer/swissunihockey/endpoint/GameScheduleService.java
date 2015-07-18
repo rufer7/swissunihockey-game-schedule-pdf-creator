@@ -19,6 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+
 @Service
 public class GameScheduleService {
 
@@ -30,6 +32,7 @@ public class GameScheduleService {
     }
 
     public void deleteFile(String fileName) {
-        // TODO delete file with given name!
+        File file = new File(String.format("./%s", fileName));
+        file.delete();
     }
 }

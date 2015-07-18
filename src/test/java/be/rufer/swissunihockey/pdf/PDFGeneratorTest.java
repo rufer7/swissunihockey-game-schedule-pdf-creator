@@ -50,7 +50,7 @@ public class PDFGeneratorTest {
 
     @After
     public void cleanup() {
-        File file = new File("./" + fileName);
+        File file = new File(String.format("./%s", fileName));
         boolean result = file.delete();
         assertTrue(result);
     }

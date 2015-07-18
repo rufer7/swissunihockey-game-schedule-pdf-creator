@@ -44,7 +44,7 @@ public class GameScheduleController {
                                                                         @PathVariable("teamId") String teamId) {
 
         String fileName = gameScheduleService.createPDFGameScheduleForTeam(clubId, teamId);
-        FileSystemResource pdfFile = new FileSystemResource("./" + fileName);
+        FileSystemResource pdfFile = new FileSystemResource(String.format("./%s", fileName));
 
         try {
             return ResponseEntity
