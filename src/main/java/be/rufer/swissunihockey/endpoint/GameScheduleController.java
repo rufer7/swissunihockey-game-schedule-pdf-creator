@@ -19,7 +19,6 @@ import be.rufer.swissunihockey.endpoint.exception.ServePDFException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
@@ -43,6 +42,7 @@ public class GameScheduleController {
     public ResponseEntity<InputStreamResource> getPDFGameScheduleOfTeam(@PathVariable("clubId") String clubId,
                                                                         @PathVariable("teamId") String teamId) {
 
+        LOG.debug("GET clubs/{}/teams/{}/game-schedule", clubId, teamId);
         String fileName = gameScheduleService.createPDFGameScheduleForTeam(clubId, teamId);
         FileSystemResource pdfFile = new FileSystemResource(String.format("./%s", fileName));
 

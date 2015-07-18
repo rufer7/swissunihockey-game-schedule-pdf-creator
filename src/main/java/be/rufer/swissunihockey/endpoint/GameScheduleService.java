@@ -46,6 +46,7 @@ public class GameScheduleService {
     }
 
     public String createPDFGameScheduleForTeam(String clubId, String teamId) {
+        LOG.debug("Create PDF game schedule for team (clubId: {}, teamId: {})", clubId, teamId);
         Calendar teamCalendar = swissunihockeyAPIClient.getCalendarForTeam(teamId);
         return pdfGenerator.createPDFBasedCalendarForTeam(teamCalendar, clubs.get(clubId));
     }
