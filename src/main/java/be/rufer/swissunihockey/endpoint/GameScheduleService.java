@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 
 @Service
@@ -26,13 +27,22 @@ public class GameScheduleService {
 
     private static final Logger LOG = LoggerFactory.getLogger(GameScheduleService.class);
 
+    @PostConstruct
+    public void postConstruct() {
+        // TODO #14
+    }
+
     public String createPDFGameScheduleForTeam(String clubId, String teamId) {
         // TODO return file name
+        // TODO resolve club name from id
         return null;
     }
 
     public void deleteFile(String fileName) {
+        LOG.info("Delete file with name '{}'", fileName);
         File file = new File(String.format("./%s", fileName));
-        file.delete();
+        if (file.delete()) {
+            LOG.info("File with name '{}' deleted", fileName);
+        }
     }
 }

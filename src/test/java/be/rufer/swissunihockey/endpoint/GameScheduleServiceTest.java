@@ -39,6 +39,11 @@ public class GameScheduleServiceTest {
     }
 
     @Test
+    public void createPDFGameScheduleForTeam() {
+        // TODO extend test method name
+    }
+
+    @Test
     public void deleteFileDeletesFileWithGivenName() throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(SAMPLE_FILE_NAME, FILE_FORMAT);
         writer.close();
