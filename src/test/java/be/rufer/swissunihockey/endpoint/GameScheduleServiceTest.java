@@ -15,27 +15,56 @@
  */
 package be.rufer.swissunihockey.endpoint;
 
+import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class GameScheduleServiceTest {
 
     private static final String SAMPLE_FILE_NAME = "sample-file.txt";
-    public static final String FILE_FORMAT = "UTF-8";
+    private static final String FILE_FORMAT = "UTF-8";
+    private static final String ACTUAL_YEAR = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 
+    @InjectMocks
     private GameScheduleService gameScheduleService;
+
+    @Mock
+    private SwissunihockeyAPIClient swissunihockeyAPIClient;
 
     @Before
     public void init() {
-        gameScheduleService = new GameScheduleService();
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void postConstructMethodCallsSwissunihockeyAPIClientForGettingClubsOfActualSeason() {
+        gameScheduleService.initMaps();
+        verify(swissunihockeyAPIClient).getClubsOfSeason(ACTUAL_YEAR);
+    }
+
+    @Test
+    public void postConstructMethodInitializesClubMapWithDataFromSwissunihockeyAPIClient() {
+        Map<String, String> clubs = new HashMap();
+        clubs.put("1", "Sample Club");
+        when(swissunihockeyAPIClient.getClubsOfSeason(ACTUAL_YEAR)).thenReturn(clubs);
+        gameScheduleService.initMaps();
+        assertNotNull(GameScheduleService.clubs);
+        assertEquals(clubs, GameScheduleService.clubs);
     }
 
     @Test

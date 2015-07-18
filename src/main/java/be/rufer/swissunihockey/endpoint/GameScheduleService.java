@@ -15,21 +15,30 @@
  */
 package be.rufer.swissunihockey.endpoint;
 
+import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.util.Calendar;
+import java.util.Map;
 
 @Service
 public class GameScheduleService {
 
     private static final Logger LOG = LoggerFactory.getLogger(GameScheduleService.class);
 
+    protected static Map<String, String> clubs;
+
+    @Autowired
+    private SwissunihockeyAPIClient swissunihockeyAPIClient;
+
     @PostConstruct
-    public void postConstruct() {
-        // TODO #14
+    public void initMaps() {
+        clubs = swissunihockeyAPIClient.getClubsOfSeason(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
     }
 
     public String createPDFGameScheduleForTeam(String clubId, String teamId) {

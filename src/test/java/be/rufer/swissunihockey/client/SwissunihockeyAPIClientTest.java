@@ -63,7 +63,7 @@ public class SwissunihockeyAPIClientTest {
     private RestTemplate mockedRestTemplate;
 
     @InjectMocks
-    private SwissunihockeyAPIClient swissunihockeyAPIClient = new SwissunihockeyAPIClient();
+    private SwissunihockeyAPIClient swissunihockeyAPIClient;
 
     @BeforeClass
     public static void setup() {
