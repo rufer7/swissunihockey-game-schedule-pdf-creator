@@ -15,6 +15,7 @@
  */
 package be.rufer.swissunihockey.pdf;
 
+import be.rufer.swissunihockey.TestConstants;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
@@ -23,15 +24,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class PDFGeneratorTest {
 
-    private static final String SAMPLE_TEAM_NAME = "Sample Team";
     private static Calendar sampleTeamCalendar;
     private PDFGenerator pdfGenerator;
     private String fileName;
@@ -57,14 +59,14 @@ public class PDFGeneratorTest {
 
     @Test
     public void createPDFBasedCalendarForTeamReturnsFileName() {
-        fileName = pdfGenerator.createPDFBasedCalendarForTeam(sampleTeamCalendar, SAMPLE_TEAM_NAME);
-        assertTrue(fileName.contains(SAMPLE_TEAM_NAME));
+        fileName = pdfGenerator.createPDFBasedCalendarForTeam(sampleTeamCalendar, TestConstants.TEAM_NAME);
+        assertTrue(fileName.contains(TestConstants.TEAM_NAME));
     }
 
     @Test
     public void createPDFBasedCalendarForTeamCreatesPDFDocument() throws IOException {
-        fileName = pdfGenerator.createPDFBasedCalendarForTeam(sampleTeamCalendar, SAMPLE_TEAM_NAME);
-        InputStream inputStream = new FileInputStream("./" + fileName);
+        fileName = pdfGenerator.createPDFBasedCalendarForTeam(sampleTeamCalendar, TestConstants.TEAM_NAME);
+        InputStream inputStream = new FileInputStream(String.format("./%s", fileName));
         assertNotNull(inputStream);
         inputStream.close();
     }

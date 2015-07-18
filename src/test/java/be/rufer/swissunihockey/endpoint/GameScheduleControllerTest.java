@@ -15,6 +15,7 @@
  */
 package be.rufer.swissunihockey.endpoint;
 
+import be.rufer.swissunihockey.TestConstants;
 import be.rufer.swissunihockey.endpoint.exception.ServePDFException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,10 +34,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class GameScheduleControllerTest {
 
-    private static final String CLUB_ID = "1";
-    private static final String TEAM_ID = "2";
-    public static final String SAMPLE_PDF_FILE_NAME = "Sample-game-schedule.pdf";
-
     @Mock
     private GameScheduleService gameScheduleService;
 
@@ -45,31 +42,31 @@ public class GameScheduleControllerTest {
 
     @Test
     public void getPDFGameScheduleOfTeamCallsGameScheduleService() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(CLUB_ID, TEAM_ID)).thenReturn(SAMPLE_PDF_FILE_NAME);
-        controller.getPDFGameScheduleOfTeam(CLUB_ID, TEAM_ID);
-        verify(gameScheduleService).createPDFGameScheduleForTeam(CLUB_ID, TEAM_ID);
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
+        controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
+        verify(gameScheduleService).createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
     }
 
     @Test
     public void getPDFGameScheduleOfTeamReturnsInputStreamResource() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(CLUB_ID, TEAM_ID)).thenReturn(SAMPLE_PDF_FILE_NAME);
-        ResponseEntity<InputStreamResource> response = controller.getPDFGameScheduleOfTeam(CLUB_ID, TEAM_ID);
-        verify(gameScheduleService).createPDFGameScheduleForTeam(CLUB_ID, TEAM_ID);
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
+        ResponseEntity<InputStreamResource> response = controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
+        verify(gameScheduleService).createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getBody() instanceof InputStreamResource);
+        assertTrue(response.getBody() != null);
     }
 
     @Test(expected = ServePDFException.class)
     public void getPDFGameScheduleOfTeamThrowsExceptionForNonExistingFileName() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(CLUB_ID, TEAM_ID)).thenReturn("Non existing file name");
-        controller.getPDFGameScheduleOfTeam(CLUB_ID, TEAM_ID);
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn("Non existing file name");
+        controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
     }
 
     @Test
     public void getPDFGameScheduleOfTeamCallsDeleteFileMethodOfGameScheduleService() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(CLUB_ID, TEAM_ID)).thenReturn(SAMPLE_PDF_FILE_NAME);
-        controller.getPDFGameScheduleOfTeam(CLUB_ID, TEAM_ID);
-        verify(gameScheduleService).createPDFGameScheduleForTeam(CLUB_ID, TEAM_ID);
-        verify(gameScheduleService).deleteFile(SAMPLE_PDF_FILE_NAME);
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
+        controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
+        verify(gameScheduleService).createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
+        verify(gameScheduleService).deleteFile(TestConstants.SAMPLE_PDF_FILE_NAME);
     }
 }

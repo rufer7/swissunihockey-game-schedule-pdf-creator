@@ -15,6 +15,7 @@
  */
 package be.rufer.swissunihockey.endpoint;
 
+import be.rufer.swissunihockey.TestConstants;
 import be.rufer.swissunihockey.client.SwissunihockeyAPIClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +60,8 @@ public class GameScheduleServiceTest {
 
     @Test
     public void postConstructMethodInitializesClubMapWithDataFromSwissunihockeyAPIClient() {
-        Map<String, String> clubs = new HashMap();
-        clubs.put("1", "Sample Club");
+        Map<String, String> clubs = new HashMap<>();
+        clubs.put(TestConstants.CLUB_ID, TestConstants.CLUB_NAME);
         when(swissunihockeyAPIClient.getClubsOfSeason(ACTUAL_YEAR)).thenReturn(clubs);
         gameScheduleService.initMaps();
         assertNotNull(GameScheduleService.clubs);
@@ -68,8 +69,8 @@ public class GameScheduleServiceTest {
     }
 
     @Test
-    public void createPDFGameScheduleForTeam() {
-        // TODO extend test method name
+    public void createPDFGameScheduleForTeamCallsSwissunihockeyAPIClientForGettingTeamsCalendar() {
+        //gameScheduleService.createPDFGameScheduleForTeam();
     }
 
     @Test
