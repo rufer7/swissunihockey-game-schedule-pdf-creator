@@ -35,7 +35,7 @@ public class GameScheduleControllerTest {
 
     private static final String CLUB_ID = "1";
     private static final String TEAM_ID = "2";
-    public static final String SAMPLE_PDF_FILE_NAME = "Sample.pdf";
+    public static final String SAMPLE_PDF_FILE_NAME = "Sample-game-schedule.pdf";
 
     @Mock
     private GameScheduleService gameScheduleService;

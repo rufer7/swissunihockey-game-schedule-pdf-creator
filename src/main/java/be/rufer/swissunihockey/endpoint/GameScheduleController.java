@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class GameScheduleController {
                                                                         @PathVariable("teamId") String teamId) {
 
         String fileName = gameScheduleService.createPDFGameScheduleForTeam(clubId, teamId);
-        ClassPathResource pdfFile = new ClassPathResource(fileName);
+        FileSystemResource pdfFile = new FileSystemResource("./" + fileName);
 
         try {
             return ResponseEntity
