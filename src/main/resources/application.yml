@@ -1,0 +1,18 @@
+ # enable the shutdown endpoint from web (otherwise it is only available from the JMX console)
+ endpoints:
+  shutdown:
+    enabled: true
+
+ info:
+  app:
+    name: Swissunihockey game schedule PDF creator
+    description: ${info.app.name} is a Spring Boot application
+
+ logging:
+  file: ./game-schedule-pdf-creator.log
+
+ zuul:
+  routes:
+    clubs:
+      path: /clubs
+      url: https://api-v2.swissunihockey.ch:443/api

@@ -25,6 +25,7 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
                 var method = config.method;
                 var url = config.url;
 
+
                 $rootScope.error = method + " on " + url + " failed with status " + status;
 
                 return $q.reject(response);
@@ -37,7 +38,7 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
         $httpProvider.interceptors.push(interceptor);
         $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     }]
-).run(function ($rootScope, $http, PDFCreatorService) {
+).run(function ($rootScope, $http) {
 
         /* Reset error when a new view is loaded */
         $rootScope.$on('$viewContentLoaded', function () {
@@ -46,42 +47,25 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
     });
 
 
-function IndexController($scope, $state, PDFCreatorService, ClubService) {
+function IndexController($scope, SwissunihockeyAPIService) {
 
-    $scope.clubEntries = ClubService.getClubs().entries;
-    $scope.teamEntries;
+    $scope.clubEntries = [];
+    SwissunihockeyAPIService.getClubs().success(function (data, status) {
+        $scope.clubEntries = data.entries;
+    });
 
     $scope.selectedClubId;
+    $scope.teamEntries;
 }
 
-var services = angular.module('gameSchedulePDFCreatorApp.services', ['ngResource']);
+var services = angular.module('gameSchedulePDFCreatorApp.services', []);
 
-services.factory('PDFCreatorService', function ($resource) {
-
-    return $resource('/api/clubs/:clubId/teams/:teamId/game-schedule', {clubId: '@clubId', teamId: '@teamId'});
-});
-
-services.factory('ClubService', function ($resource) {
-
-    return $resource('https://api-v2.swissunihockey.ch/api/clubs', {},
-        {
-            getClubs: {
-                method: 'GET'
-            }
+services.factory('SwissunihockeyAPIService', function ($http) {
+    return {
+        getClubs: function () {
+            return $http.get("/clubs").success(function (data) {
+                return data.entries;
+            });
         }
-    );
-});
-
-services.factory('TeamService', function ($resource) {
-
-    return $resource('https://api-v2.swissunihockey.ch/api/teams?club_id=:clubId&season=:season&mode=by_club', {
-            clubId: '@clubId',
-            season: '@season'
-        },
-        {
-            getTeamsOfClub: {
-                method: 'GET'
-            }
-        }
-    );
+    }
 });
