@@ -39,7 +39,6 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
             };
         };
         $httpProvider.interceptors.push(interceptor);
-
         $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     }]
 ).run(function ($rootScope, $http, PDFCreatorService) {
@@ -53,7 +52,12 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
 
 function IndexController($scope, $state, PDFCreatorService, SwissunihockeyAPIService) {
 
-    $scope.clubEntries = SwissunihockeyAPIService.get().entries;
+    $scope.clubEntries = SwissunihockeyAPIService.getClubs().entries;
+    $scope.selectedClub;
+
+    // TODO show button, if selected club & selected team defined!
+    // Resource examples see here: https://github.com/mraible/boot-ionic/blob/master/src/main/resources/public/js/app.js
+    //$scope.clubEntries = [{text: "hallo"}, {text: "hallo2"}, {text: "hallokljsdfl"}];
 }
 
 var services = angular.module('gameSchedulePDFCreatorApp.services', ['ngResource']);
@@ -65,5 +69,17 @@ services.factory('PDFCreatorService', function ($resource) {
 
 services.factory('SwissunihockeyAPIService', function ($resource) {
 
-    return $resource('https://api-v2.swissunihockey.ch/api/clubs');
+    return $resource(':url', {},
+        {
+            getClubs: {
+                method: 'GET',
+                params: {'url': 'https://api-v2.swissunihockey.ch/api/clubs'}
+            },
+            getTeamsOfClub: {
+                method: 'GET',
+                // TODO replace season and club_id with params
+                params: {'url': 'https://api-v2.swissunihockey.ch/api/teams?club_id=441388&season=2015&mode=by_club'}
+            }
+        }
+    );
 });
