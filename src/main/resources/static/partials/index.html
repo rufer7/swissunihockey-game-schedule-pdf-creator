@@ -7,7 +7,16 @@
                     Klub
                 </div>
                 <select>
-                    <option ng-repeat="clubEntry in clubEntries">{{clubEntry.text}}</option>
+                    <option ng-repeat="clubEntry in clubEntries" ng-model="selectedClubId">{{clubEntry.text}}</option>
+                </select>
+            </label>
+
+            <label class="item item-input item-select" ng-show="selectedClubId">
+                <div class="input-label">
+                    Team
+                </div>
+                <select>
+                    <option ng-repeat="teamEntry in teamEntries">{{teamEntry.text}}</option>
                 </select>
             </label>
 

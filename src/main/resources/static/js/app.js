@@ -55,10 +55,8 @@ function IndexController($scope, $state, PDFCreatorService, ClubService) {
     $scope.clubEntries = ClubService.getClubs().entries;
     $scope.teamEntries;
 
-    // teamEntries = SwissunihockeyAPIService.getTeamsOfClub().entries;
-    $scope.selectedClub;
+    $scope.selectedClubId;
 
-    // TODO show button, if selected club & selected team defined!
     // Resource examples see here: https://github.com/mraible/boot-ionic/blob/master/src/main/resources/public/js/app.js
     //$scope.clubEntries = [{text: "hallo"}, {text: "hallo2"}, {text: "hallokljsdfl"}];
 }
@@ -88,7 +86,7 @@ services.factory('TeamService', function ($resource) {
             season: '@season'
         },
         {
-            getClubs: {
+            getTeamsOfClub: {
                 method: 'GET'
             }
         }
