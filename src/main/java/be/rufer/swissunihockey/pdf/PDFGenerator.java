@@ -114,6 +114,7 @@ public class PDFGenerator {
         contentStream.setFont(font, OVERVIEW_FONT_SIZE);
         contentStream.beginText();
         contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_OVERVIEW);
+        // TODO search for DESCRIPTION Property containing "Runde x"
         Property property = ((Component)calendar.getComponents().iterator().next()).getProperties().getProperty(Property.DESCRIPTION);
         String overviewText = property.getValue().replace("\\", "").replaceAll("Runde\\s+\\d,+\\s", "");
         contentStream.drawString(overviewText);
