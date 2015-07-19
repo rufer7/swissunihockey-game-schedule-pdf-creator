@@ -25,11 +25,7 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
                 var method = config.method;
                 var url = config.url;
 
-                if (status == 401) {
-                    $location.path("/login");
-                } else {
-                    $rootScope.error = method + " on " + url + " failed with status " + status;
-                }
+                $rootScope.error = method + " on " + url + " failed with status " + status;
 
                 return $q.reject(response);
             }
@@ -56,9 +52,6 @@ function IndexController($scope, $state, PDFCreatorService, ClubService) {
     $scope.teamEntries;
 
     $scope.selectedClubId;
-
-    // Resource examples see here: https://github.com/mraible/boot-ionic/blob/master/src/main/resources/public/js/app.js
-    //$scope.clubEntries = [{text: "hallo"}, {text: "hallo2"}, {text: "hallokljsdfl"}];
 }
 
 var services = angular.module('gameSchedulePDFCreatorApp.services', ['ngResource']);
