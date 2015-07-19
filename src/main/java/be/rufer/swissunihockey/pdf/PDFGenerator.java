@@ -131,7 +131,9 @@ public class PDFGenerator {
 
             contentStream.beginText();
             contentStream.moveTextPositionByAmount(X_ALIGNMENT, yPosition);
-            contentStream.drawString(formatDate(properties.getProperty(Property.DTSTART).getValue()));
+            if (properties.getProperty(Property.DTSTART) != null) {
+                contentStream.drawString(formatDate(properties.getProperty(Property.DTSTART).getValue()));
+            }
             String summary = properties.getProperty(Property.SUMMARY).getValue();
             contentStream.moveTextPositionByAmount(100, ZERO);
             contentStream.drawString(summary.substring(0, summary.indexOf(" - ")));
