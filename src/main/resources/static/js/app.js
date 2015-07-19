@@ -66,6 +66,12 @@ services.factory('SwissunihockeyAPIService', function ($http) {
             return $http.get("/clubs").success(function (data) {
                 return data.entries;
             });
+        },
+        // TODO pass clubId as parameter
+        getTeams: function (clubId) {
+            return $http.get("/teams?mode=by_club&clubId=" + clubId).success(function (data) {
+                return data.entries;
+            })
         }
     }
 });

@@ -16,3 +16,6 @@
     clubs:
       path: /clubs
       url: https://api-v2.swissunihockey.ch:443/api
+    teams:
+      path: /teams
+      url: https://api-v2.swissunihockey.ch:443/api
