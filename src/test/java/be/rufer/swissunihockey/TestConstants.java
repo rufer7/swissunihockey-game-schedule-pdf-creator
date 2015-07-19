@@ -17,8 +17,8 @@ package be.rufer.swissunihockey;
 
 public interface TestConstants {
 
-    String TEAM_ID = "1";
-    String CLUB_ID = "9";
+    String TEAM_ID = "428660";
+    String CLUB_ID = "441388";
     String SEASON = "2015";
     String LEAGUE = "1";
     String GAME_CLASS = "11";
