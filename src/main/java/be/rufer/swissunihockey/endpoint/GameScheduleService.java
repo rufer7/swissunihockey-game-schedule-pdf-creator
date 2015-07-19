@@ -33,6 +33,8 @@ import java.util.Map;
 public class GameScheduleService {
 
     private static final Logger LOG = LoggerFactory.getLogger(GameScheduleService.class);
+    private static final String PDF_FILE_PATTERN = ".*-[0-9]{10,15}.pdf";
+    private static final String ROOT_DIRECTORY = "./";
 
     protected static Map<String, String> clubs;
 
@@ -55,12 +57,12 @@ public class GameScheduleService {
 
     public void deleteUnusedFiles() {
         LOG.info("Delete all unused files in directory ./");
-        File dir = new FileSystemResource("./").getFile();
+        File dir = new FileSystemResource(ROOT_DIRECTORY).getFile();
         Assert.state(dir.isDirectory());
 
         File[] files = dir.listFiles();
         for (File file : files) {
-            if (file.getName().matches(".*-[0-9]{10,15}.pdf")) {
+            if (file.getName().matches(PDF_FILE_PATTERN)) {
                 if (file.delete()) {
                     LOG.info("File with name '{}' deleted", file.getName());
                 }
