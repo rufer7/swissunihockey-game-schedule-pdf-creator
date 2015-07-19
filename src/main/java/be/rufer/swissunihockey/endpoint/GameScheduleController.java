@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +49,6 @@ public class GameScheduleController {
             return ResponseEntity
                     .ok()
                     .contentLength(pdfFile.contentLength())
-                    .contentType(MediaType.parseMediaType(MediaType.APPLICATION_OCTET_STREAM_VALUE))
                     .body(new InputStreamResource(pdfFile.getInputStream()));
         } catch (IOException e) {
             LOG.error("Error occurred while loading pdf file '" + fileName + "' from file system", e);
