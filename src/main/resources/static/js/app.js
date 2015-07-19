@@ -72,11 +72,10 @@ services.factory('PDFCreatorService', function ($resource) {
 
 services.factory('ClubService', function ($resource) {
 
-    return $resource(':url', {},
+    return $resource('https://api-v2.swissunihockey.ch/api/clubs', {},
         {
             getClubs: {
-                method: 'GET',
-                params: {'url': 'https://api-v2.swissunihockey.ch/api/clubs'}
+                method: 'GET'
             }
         }
     );
@@ -84,11 +83,13 @@ services.factory('ClubService', function ($resource) {
 
 services.factory('TeamService', function ($resource) {
 
-    return $resource(':url', {clubId: '@clubId', season: '@season'},
+    return $resource('https://api-v2.swissunihockey.ch/api/teams?club_id=:clubId&season=:season&mode=by_club', {
+            clubId: '@clubId',
+            season: '@season'
+        },
         {
             getClubs: {
-                method: 'GET',
-                params: {'url': 'https://api-v2.swissunihockey.ch/api/teams?club_id=:clubId&season=:season&mode=by_club'}
+                method: 'GET'
             }
         }
     );
