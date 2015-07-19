@@ -40,7 +40,7 @@ import static org.mockito.Mockito.when;
 
 public class GameScheduleServiceTest {
 
-    private static final String SAMPLE_FILE_NAME = "sample-file.txt";
+    private static final String SAMPLE_FILE_NAME = "Hornets R.Moosseedorf Worblental-1437314588.pdf";
     private static final String FILE_FORMAT = "UTF-8";
     private static final String ACTUAL_YEAR = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 
