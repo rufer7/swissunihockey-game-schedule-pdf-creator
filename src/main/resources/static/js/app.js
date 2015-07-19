@@ -53,7 +53,7 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
 
 function IndexController($scope, $state, PDFCreatorService, SwissunihockeyAPIService) {
 
-    $scope.clubEntries = SwissunihockeyAPIService.query();
+    $scope.clubEntries = SwissunihockeyAPIService.get().entries;
 }
 
 var services = angular.module('gameSchedulePDFCreatorApp.services', ['ngResource']);
