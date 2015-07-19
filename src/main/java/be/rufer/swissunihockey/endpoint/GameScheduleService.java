@@ -62,11 +62,15 @@ public class GameScheduleService {
 
         File[] files = dir.listFiles();
         for (File file : files) {
-            if (file.getName().matches(PDF_FILE_PATTERN)) {
+            if (isGeneratedPdfFile(file)) {
                 if (file.delete()) {
                     LOG.info("File with name '{}' deleted", file.getName());
                 }
             }
         }
+    }
+
+    private boolean isGeneratedPdfFile(File file) {
+        return file.getName().matches(PDF_FILE_PATTERN);
     }
 }
