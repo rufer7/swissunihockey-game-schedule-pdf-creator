@@ -67,6 +67,6 @@ public class GameScheduleControllerTest {
         when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
         controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
         verify(gameScheduleService).createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
-        verify(gameScheduleService).deleteFile(TestConstants.SAMPLE_PDF_FILE_NAME);
+        verify(gameScheduleService).deleteUnusedFiles();
     }
 }

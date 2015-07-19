@@ -21,7 +21,9 @@ import net.fortuna.ical4j.model.Calendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -51,11 +53,18 @@ public class GameScheduleService {
         return pdfGenerator.createPDFBasedCalendarForTeam(teamCalendar, clubs.get(clubId));
     }
 
-    public void deleteFile(String fileName) {
-        LOG.info("Delete file with name '{}'", fileName);
-        File file = new File(String.format("./%s", fileName));
-        if (file.delete()) {
-            LOG.info("File with name '{}' deleted", fileName);
+    public void deleteUnusedFiles() {
+        LOG.info("Delete all unused files in directory ./");
+        File dir = new FileSystemResource("./").getFile();
+        Assert.state(dir.isDirectory());
+
+        File[] files = dir.listFiles();
+        for (File file : files) {
+            if (file.getName().matches(".*-[0-9]{10,15}.pdf")) {
+                if (file.delete()) {
+                    LOG.info("File with name '{}' deleted", file.getName());
+                }
+            }
         }
     }
 }
