@@ -102,6 +102,14 @@ public class PDFGenerator {
         return fileName;
     }
 
+    private void writeTitle(PDPageContentStream contentStream, String template, String... templateVariables) throws IOException {
+        contentStream.setFont(font, TITLE_FONT_SIZE);
+        contentStream.beginText();
+        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_TITLE);
+        contentStream.drawString(String.format(template, templateVariables));
+        contentStream.endText();
+    }
+
     private void writeTeamOverview(PDPageContentStream contentStream, Calendar calendar) throws IOException {
         contentStream.setFont(font, OVERVIEW_FONT_SIZE);
         contentStream.beginText();
@@ -109,14 +117,6 @@ public class PDFGenerator {
         Property property = ((Component)calendar.getComponents().iterator().next()).getProperties().getProperty(Property.DESCRIPTION);
         String overviewText = property.getValue().replace("\\", "").replaceAll("Runde\\s+\\d,+\\s", "");
         contentStream.drawString(overviewText);
-        contentStream.endText();
-    }
-
-    private void writeTitle(PDPageContentStream contentStream, String template, String... templateVariables) throws IOException {
-        contentStream.setFont(font, TITLE_FONT_SIZE);
-        contentStream.beginText();
-        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_TITLE);
-        contentStream.drawString(String.format(template, templateVariables));
         contentStream.endText();
     }
 
