@@ -47,15 +47,26 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
     });
 
 
-function IndexController($scope, SwissunihockeyAPIService) {
+function IndexController($scope, SwissunihockeyAPIService, PDFGeneratorService) {
 
     $scope.clubEntries = [];
-    SwissunihockeyAPIService.getClubs().success(function (data, status) {
+    $scope.teamEntries = [];
+    $scope.selectedClubId;
+    $scope.selectedTeamId;
+
+    SwissunihockeyAPIService.getClubs().success(function (data) {
         $scope.clubEntries = data.entries;
     });
 
-    $scope.selectedClubId;
-    $scope.teamEntries;
+    $scope.$watch('selectedClubId', function() {
+        SwissunihockeyAPIService.getTeams($scope.selectedClubId).success(function(data) {
+            $scope.teamEntries = data.entries;
+        });
+    });
+
+    $scope.generatePDF = function() {
+        PDFGeneratorService.getPDF($scope.selectedClubId, $scope.selectedTeamId);
+    }
 }
 
 var services = angular.module('gameSchedulePDFCreatorApp.services', []);
@@ -71,6 +82,19 @@ services.factory('SwissunihockeyAPIService', function ($http) {
             return $http.get("/teams?mode=by_club&clubId=" + clubId).success(function (data) {
                 return data.entries;
             })
+        }
+    }
+});
+
+services.factory('PDFGeneratorService', function ($http) {
+    return {
+        getPDF: function (clubId, teamId) {
+            return $http.get('/api/clubs' + clubId + '/teams/' + teamId + '/game-schedule', { responseType: 'arraybuffer' })
+                .success(function (data) {
+                    var file = new Blob([data], { type: 'application/pdf' });
+                    var fileURL = URL.createObjectURL(file);
+                    window.open(fileURL);
+                });
         }
     }
 });

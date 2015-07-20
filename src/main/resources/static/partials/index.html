@@ -3,23 +3,25 @@
         <div class="list">
 
             <label class="item item-input item-select">
-                <div class="input-label">Verein</div>
-                <select>
-                    <option ng-repeat="clubEntry in clubEntries" value="{{clubEntry.set_in_context.club_id}}"
-                            ng-model="selectedClubId">
+                <div class="input-label">Vereinsauswahl</div>
+                <select ng-model="selectedClubId">
+                    <option ng-repeat="clubEntry in clubEntries" value="{{clubEntry.set_in_context.club_id}}">
                         {{clubEntry.text}}
                     </option>
                 </select>
             </label>
 
             <label class="item item-input item-select" ng-show="selectedClubId">
-                <div class="input-label">Team</div>
-                <select>
-                    <option ng-repeat="teamEntry in teamEntries">{{teamEntry.text}}</option>
+                <div class="input-label">Teamauswahl</div>
+                <select ng-model="selectedTeamId">
+                    <option ng-repeat="teamEntry in teamEntries" value="{{teamEntry.set_in_context.team_id}}">{{teamEntry.text}}</option>
                 </select>
             </label>
-
         </div>
+
+        <button class="button button-full button-positive button-dark" ng-show="selectedTeamId" ng-click="generatePDF()">
+            PDF erstellen
+        </button>
     </ion-content>
 </ion-view>
 
