@@ -4,12 +4,12 @@
 
             <label class="item item-input item-select">
                 <div class="input-label">Vereinsauswahl</div>
-                <select ng-model="selectedClubId">
+                <select ng-model="selectedClub.id">
                     <option ng-repeat="clubEntry in clubEntries" value="{{clubEntry.set_in_context.club_id}}">{{clubEntry.text}}</option>
                 </select>
             </label>
 
-            <label class="item item-input item-select" ng-show="selectedClubId">
+            <label class="item item-input item-select" ng-show="selectedClub.id">
                 <div class="input-label">Teamauswahl</div>
                 <select ng-model="selectedTeamId">
                     <option ng-repeat="teamEntry in teamEntries" value="{{teamEntry.set_in_context.team_id}}">{{teamEntry.text}}</option>

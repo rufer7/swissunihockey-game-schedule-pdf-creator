@@ -51,19 +51,24 @@ function IndexController($scope, SwissunihockeyAPIService, PDFGeneratorService) 
 
     $scope.clubEntries = [];
     $scope.teamEntries = [];
+    $scope.selectedClub = {
+        id: ""
+    };
 
     SwissunihockeyAPIService.getClubs().success(function (data) {
         $scope.clubEntries = data.entries;
     });
 
-    $scope.$watch('selectedClubId', function() {
-        SwissunihockeyAPIService.getTeams($scope.selectedClubId).success(function(data) {
-            $scope.teamEntries = data.entries;
-        });
+    $scope.$watch('selectedClub.id', function(newVal) {
+        if (newVal !== "") {
+            SwissunihockeyAPIService.getTeams(newVal).success(function (data) {
+                $scope.teamEntries = data.entries;
+            });
+        }
     });
 
     $scope.generatePDF = function() {
-        PDFGeneratorService.getPDF($scope.selectedClubId, $scope.selectedTeamId);
+        PDFGeneratorService.getPDF($scope.selectedClub.id, $scope.selectedTeamId);
     }
 }
 
@@ -77,7 +82,7 @@ services.factory('SwissunihockeyAPIService', function ($http) {
             });
         },
         getTeams: function (clubId) {
-            return $http.get("/teams?mode=by_club&clubId=" + clubId).success(function (data) {
+            return $http.get("/teams?club_id=" + clubId + "&mode=by_club").success(function (data) {
                 return data.entries;
             })
         }
