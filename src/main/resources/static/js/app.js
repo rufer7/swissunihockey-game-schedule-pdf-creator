@@ -40,11 +40,11 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
     }]
 ).run(function ($rootScope, $http) {
 
-        /* Reset error when a new view is loaded */
-        $rootScope.$on('$viewContentLoaded', function () {
-            delete $rootScope.error;
-        });
+    /* Reset error when a new view is loaded */
+    $rootScope.$on('$viewContentLoaded', function () {
+        delete $rootScope.error;
     });
+});
 
 
 function IndexController($scope, SwissunihockeyAPIService, PDFGeneratorService) {
