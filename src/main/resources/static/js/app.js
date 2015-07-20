@@ -100,7 +100,7 @@ services.factory('PDFGeneratorService', function ($http) {
                 .success(function (data) {
                     var file = new Blob([data], { type: 'application/pdf' });
                     var fileURL = URL.createObjectURL(file);
-                    window.open(fileURL);
+                    window.open(fileURL, '_blank');
                 });
         }
     }
