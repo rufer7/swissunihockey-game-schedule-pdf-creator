@@ -3,9 +3,7 @@
         <div class="list">
 
             <label class="item item-input item-select">
-                <div class="input-label">
-                    Klub
-                </div>
+                <div class="input-label">Verein</div>
                 <select>
                     <option ng-repeat="clubEntry in clubEntries" value="{{clubEntry.set_in_context.club_id}}"
                             ng-model="selectedClubId">{{clubEntry.text}}
@@ -14,9 +12,7 @@
             </label>
 
             <label class="item item-input item-select" ng-show="selectedClubId">
-                <div class="input-label">
-                    Team
-                </div>
+                <div class="input-label">Team</div>
                 <select>
                     <option ng-repeat="teamEntry in teamEntries">{{teamEntry.text}}</option>
                 </select>
