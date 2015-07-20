@@ -106,7 +106,7 @@ public class PDFGenerator {
         contentStream.setFont(font, TITLE_FONT_SIZE);
         contentStream.beginText();
         contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_TITLE);
-        contentStream.drawString(String.format(template, templateVariables));
+        contentStream.drawString(String.format(template, new Object[]{templateVariables}));
         contentStream.endText();
     }
 
