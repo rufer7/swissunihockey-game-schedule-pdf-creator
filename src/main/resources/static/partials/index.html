@@ -5,9 +5,7 @@
             <label class="item item-input item-select">
                 <div class="input-label">Vereinsauswahl</div>
                 <select ng-model="selectedClubId">
-                    <option ng-repeat="clubEntry in clubEntries" value="{{clubEntry.set_in_context.club_id}}">
-                        {{clubEntry.text}}
-                    </option>
+                    <option ng-repeat="clubEntry in clubEntries" value="{{clubEntry.set_in_context.club_id}}">{{clubEntry.text}}</option>
                 </select>
             </label>
 

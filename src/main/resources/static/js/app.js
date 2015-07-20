@@ -51,8 +51,6 @@ function IndexController($scope, SwissunihockeyAPIService, PDFGeneratorService) 
 
     $scope.clubEntries = [];
     $scope.teamEntries = [];
-    $scope.selectedClubId;
-    $scope.selectedTeamId;
 
     SwissunihockeyAPIService.getClubs().success(function (data) {
         $scope.clubEntries = data.entries;
