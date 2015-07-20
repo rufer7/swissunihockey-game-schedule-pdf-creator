@@ -12,7 +12,7 @@ A web application that generates and serves game schedules as PDF documents
 This application consumes the [swissunihockey API v2](https://api-v2.swissunihockey.ch/api/doc)
 
 
-### Deployment to cloudfoundry
+## Deployment to cloudfoundry
 
 Execute the following command to deploy the application to cloudfoundry:
 
