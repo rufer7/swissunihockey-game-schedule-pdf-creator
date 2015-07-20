@@ -11,13 +11,13 @@
 
             <label class="item item-input item-select" ng-show="selectedClub.id">
                 <div class="input-label">Teamauswahl</div>
-                <select ng-model="selectedTeamId">
+                <select ng-model="selectedTeam.id">
                     <option ng-repeat="teamEntry in teamEntries" value="{{teamEntry.set_in_context.team_id}}">{{teamEntry.text}}</option>
                 </select>
             </label>
         </div>
 
-        <button class="button button-full button-positive button-dark" ng-show="selectedTeamId" ng-click="generatePDF()">
+        <button class="button button-full button-positive button-dark" ng-show="selectedTeam.id !== ''" ng-click="generatePDF()">
             PDF erstellen
         </button>
     </ion-content>

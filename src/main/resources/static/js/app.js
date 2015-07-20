@@ -54,6 +54,9 @@ function IndexController($scope, SwissunihockeyAPIService, PDFGeneratorService) 
     $scope.selectedClub = {
         id: ""
     };
+    $scope.selectedTeam = {
+        id: ""
+    }
 
     SwissunihockeyAPIService.getClubs().success(function (data) {
         $scope.clubEntries = data.entries;
@@ -68,7 +71,7 @@ function IndexController($scope, SwissunihockeyAPIService, PDFGeneratorService) 
     });
 
     $scope.generatePDF = function() {
-        PDFGeneratorService.getPDF($scope.selectedClub.id, $scope.selectedTeamId);
+        PDFGeneratorService.getPDF($scope.selectedClub.id, $scope.selectedTeam.id);
     }
 }
 
@@ -82,6 +85,7 @@ services.factory('SwissunihockeyAPIService', function ($http) {
             });
         },
         getTeams: function (clubId) {
+            console.log("/teams?club_id=" + clubId + "&mode=by_club");
             return $http.get("/teams?club_id=" + clubId + "&mode=by_club").success(function (data) {
                 return data.entries;
             })
@@ -92,7 +96,7 @@ services.factory('SwissunihockeyAPIService', function ($http) {
 services.factory('PDFGeneratorService', function ($http) {
     return {
         getPDF: function (clubId, teamId) {
-            return $http.get('/api/clubs' + clubId + '/teams/' + teamId + '/game-schedule', { responseType: 'arraybuffer' })
+            return $http.get('/api/clubs/' + clubId + '/teams/' + teamId + '/game-schedule', { responseType: 'arraybuffer' })
                 .success(function (data) {
                     var file = new Blob([data], { type: 'application/pdf' });
                     var fileURL = URL.createObjectURL(file);
