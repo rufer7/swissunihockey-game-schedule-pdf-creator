@@ -5,8 +5,9 @@
 
  info:
   app:
-    name: Swissunihockey game schedule PDF creator
-    description: ${info.app.name} is a Spring Boot application
+    name: @project.name@
+    description: @project.description@
+    version: v@project.version@
 
  logging:
   file: ./game-schedule-pdf-creator.log
