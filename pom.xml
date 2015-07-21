@@ -173,9 +173,9 @@
                             <target>https://api.appcloud-nova.swisscom.com</target>
                             <appname>swissunihockey-spielplan-als-pdf</appname>
                             <buildpack>https://github.com/cloudfoundry/java-buildpack.git</buildpack>
+                            <path>${project.build.directory}/${project.build.finalName}.jar</path>
                             <org>maru</org>
                             <space>DEV</space>
-                            <memory>256</memory>
                         </configuration>
                         <executions>
                             <execution>
