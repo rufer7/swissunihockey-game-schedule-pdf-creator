@@ -14,7 +14,7 @@
 
     <groupId>be.rufer.swissunihockey</groupId>
     <artifactId>game-schedule-pdf-generator</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>swissunihockey-game-schedule-pdf-creator</name>
