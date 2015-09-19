@@ -42,14 +42,16 @@ public class GameScheduleControllerTest {
 
     @Test
     public void getPDFGameScheduleOfTeamCallsGameScheduleService() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID))
+                .thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
         controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
         verify(gameScheduleService).createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
     }
 
     @Test
     public void getPDFGameScheduleOfTeamReturnsInputStreamResource() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID))
+                .thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
         ResponseEntity<InputStreamResource> response = controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
         verify(gameScheduleService).createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -58,15 +60,17 @@ public class GameScheduleControllerTest {
 
     @Test(expected = ServePDFException.class)
     public void getPDFGameScheduleOfTeamThrowsExceptionForNonExistingFileName() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn("Non existing file name");
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID))
+                .thenReturn("Non existing file name");
         controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
     }
 
     @Test
     public void getPDFGameScheduleOfTeamCallsDeleteFileMethodOfGameScheduleService() {
-        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID)).thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
+        when(gameScheduleService.createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID))
+                .thenReturn(TestConstants.SAMPLE_PDF_FILE_NAME);
         controller.getPDFGameScheduleOfTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
         verify(gameScheduleService).createPDFGameScheduleForTeam(TestConstants.CLUB_ID, TestConstants.TEAM_ID);
-        verify(gameScheduleService).deleteUnusedFiles();
+        verify(gameScheduleService).deleteOldUnusedFiles();
     }
 }

@@ -95,10 +95,11 @@ public class GameScheduleServiceTest {
     }
 
     @Test
-    public void deleteUnusedFilesDeletesUnusedFilesInRootDirectory() throws FileNotFoundException, UnsupportedEncodingException {
+    public void deleteOldUnusedFilesDeletesUnusedFilesOlderThanOneHourInRootDirectory()
+            throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(SAMPLE_FILE_NAME, FILE_FORMAT);
         writer.close();
-        gameScheduleService.deleteUnusedFiles();
+        gameScheduleService.deleteOldUnusedFiles();
         assertFalse((new File(String.format("./%s", SAMPLE_FILE_NAME)).exists()));
     }
 }

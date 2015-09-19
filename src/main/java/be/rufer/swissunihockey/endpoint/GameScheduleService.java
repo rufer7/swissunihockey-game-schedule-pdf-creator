@@ -55,16 +55,18 @@ public class GameScheduleService {
         return pdfGenerator.createPDFBasedCalendarForTeam(teamCalendar, clubs.get(clubId));
     }
 
-    public void deleteUnusedFiles() {
-        LOG.info("Delete all unused files in directory ./");
+    public void deleteOldUnusedFiles() {
+        LOG.info("Delete all files older than 1 hour in directory ./");
         File dir = new FileSystemResource(ROOT_DIRECTORY).getFile();
         Assert.state(dir.isDirectory());
 
         File[] files = dir.listFiles();
-        for (File file : files) {
-            if (isGeneratedPdfFile(file)) {
-                if (file.delete()) {
-                    LOG.info("File with name '{}' deleted", file.getName());
+        if (null != files) {
+            for (File file : files) {
+                if (isGeneratedPdfFile(file)) {
+                    if (file.delete()) {
+                        LOG.info("File with name '{}' deleted", file.getName());
+                    }
                 }
             }
         }
