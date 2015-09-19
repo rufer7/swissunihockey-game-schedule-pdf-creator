@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +44,7 @@ public class GameScheduleServiceTest {
     private static final String SAMPLE_FILE_NAME = "Hornets R.Moosseedorf Worblental-1437314588.pdf";
     private static final String FILE_FORMAT = "UTF-8";
     private static final String ACTUAL_YEAR = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+    private static final String ROOT_DIRECTORY = "./";
 
     @InjectMocks
     private GameScheduleService gameScheduleService;
@@ -95,10 +97,30 @@ public class GameScheduleServiceTest {
     }
 
     @Test
-    public void deleteUnusedFilesDeletesUnusedFilesInRootDirectory() throws FileNotFoundException, UnsupportedEncodingException {
+    public void deleteOldUnusedFilesDeletesUnusedFilesOlderThanFifteenMinutesInRootDirectory()
+            throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(SAMPLE_FILE_NAME, FILE_FORMAT);
         writer.close();
-        gameScheduleService.deleteUnusedFiles();
+
+        File file = new File(ROOT_DIRECTORY + SAMPLE_FILE_NAME);
+        boolean lastModifiedSet = file.setLastModified(LocalDate.now().minusDays(1).toEpochDay());
+
+        gameScheduleService.deleteOldUnusedFiles();
+        assertTrue(lastModifiedSet);
         assertFalse((new File(String.format("./%s", SAMPLE_FILE_NAME)).exists()));
+    }
+
+    @Test
+    public void deleteOldUnusedFilesNotDeletingFilesCreatedOrModifiedInTheLastFifteenMinutes()
+            throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter(SAMPLE_FILE_NAME, FILE_FORMAT);
+        writer.close();
+        gameScheduleService.deleteOldUnusedFiles();
+        assertTrue((new File(String.format("./%s", SAMPLE_FILE_NAME)).exists()));
+
+        // CLEANUP
+        File file = new File(ROOT_DIRECTORY + SAMPLE_FILE_NAME);
+        boolean cleanupSuccess = file.delete();
+        assertTrue(cleanupSuccess);
     }
 }

@@ -62,16 +62,25 @@ public class SwissunihockeyAPIClientTest {
 
     private static void initSampleGamesResponse() {
         List<Tab> tabs = new ArrayList<>();
-        tabs.add(Tab.builder().text("HNLA").link(Link.builder().leagueEntry(LeagueEntry.builder().leagueId(1).build()).build()).build());
+        tabs.add(Tab.builder()
+                .text("HNLA")
+                .link(Link.builder().leagueEntry(LeagueEntry.builder().leagueId(1).build()).build())
+                .build());
         List<OtherLeagueEntry> otherLeagueEntries = new ArrayList<>();
-        otherLeagueEntries.add(OtherLeagueEntry.builder().text("Herren Aktive GF 1. Liga").leagueEntry(LeagueEntry.builder().leagueId(2).build()).build());
+        otherLeagueEntries.add(OtherLeagueEntry.builder()
+                .text("Herren Aktive GF 1. Liga")
+                .leagueEntry(LeagueEntry.builder().leagueId(2).build())
+                .build());
         tabs.add(Tab.builder().text("andere").otherLeagueEntries(otherLeagueEntries).build());
         sampleGamesResponse = GamesResponse.builder().gameData(GameData.builder().tabs(tabs).build()).build();
     }
 
     private static void initSampleClubResponse() {
         List<ClubEntry> entries = new ArrayList<>();
-        entries.add(ClubEntry.builder().text(TestConstants.CLUB_NAME).context(ClubEntryContext.builder().clubId(TestConstants.CLUB_ID).build()).build());
+        entries.add(ClubEntry.builder()
+                .text(TestConstants.CLUB_NAME)
+                .context(ClubEntryContext.builder().clubId(TestConstants.CLUB_ID).build())
+                .build());
         sampleClubsResponse = ClubsResponse.builder().entries(entries).build();
     }
 
@@ -84,7 +93,8 @@ public class SwissunihockeyAPIClientTest {
     @Test
     public void getCalendarForTeamCallsSwissunihockeyAPI() {
         variables.put(UrlVariables.TEAM_ID, TestConstants.TEAM_ID);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables))).thenReturn(TestConstants.CALENDAR_STRING);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables)))
+                .thenReturn(TestConstants.CALENDAR_STRING);
         swissunihockeyAPIClient.getCalendarForTeam(TestConstants.TEAM_ID);
         verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables));
     }
@@ -92,7 +102,8 @@ public class SwissunihockeyAPIClientTest {
     @Test
     public void getCalendarForTeamReturnsValidCalendar() {
         variables.put(UrlVariables.TEAM_ID, TestConstants.TEAM_ID);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables))).thenReturn(TestConstants.CALENDAR_STRING);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables)))
+                .thenReturn(TestConstants.CALENDAR_STRING);
         Calendar calendar = swissunihockeyAPIClient.getCalendarForTeam(TestConstants.TEAM_ID);
         assertNotNull(calendar);
     }
@@ -100,14 +111,16 @@ public class SwissunihockeyAPIClientTest {
     @Test(expected = CalendarConversionException.class)
     public void getCalendarForTeamThrowsCalendarConversionExceptionForInvalidResponse() {
         variables.put(UrlVariables.TEAM_ID, TestConstants.TEAM_ID);
-                when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables))).thenReturn("");
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_TEAM), eq(String.class), eq(variables)))
+                .thenReturn("");
         swissunihockeyAPIClient.getCalendarForTeam(TestConstants.TEAM_ID);
     }
 
     @Test
     public void getCalendarForClubCallsSwissnihockeyAPI() {
         variables.put(UrlVariables.CLUB_ID, TestConstants.CLUB_ID);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables))).thenReturn(TestConstants.CALENDAR_STRING);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables)))
+                .thenReturn(TestConstants.CALENDAR_STRING);
         swissunihockeyAPIClient.getCalendarForClub(TestConstants.CLUB_ID);
         verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables));
     }
@@ -115,7 +128,8 @@ public class SwissunihockeyAPIClientTest {
     @Test
     public void getCalendarForClubReturnsValidCalendar() {
         variables.put(UrlVariables.CLUB_ID, TestConstants.CLUB_ID);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables))).thenReturn(TestConstants.CALENDAR_STRING);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables)))
+                .thenReturn(TestConstants.CALENDAR_STRING);
         Calendar calendar = swissunihockeyAPIClient.getCalendarForClub(TestConstants.CLUB_ID);
         assertNotNull(calendar);
     }
@@ -123,7 +137,8 @@ public class SwissunihockeyAPIClientTest {
     @Test(expected = CalendarConversionException.class)
     public void getCalendarForClubThrowsCalendarConversionExceptionForInvalidResponse() {
         variables.put(UrlVariables.CLUB_ID, TestConstants.CLUB_ID);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables))).thenReturn("");
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_CLUB), eq(String.class), eq(variables)))
+                .thenReturn("");
         swissunihockeyAPIClient.getCalendarForClub(TestConstants.CLUB_ID);
     }
 
@@ -133,7 +148,8 @@ public class SwissunihockeyAPIClientTest {
         variables.put(UrlVariables.LEAGUE, TestConstants.LEAGUE);
         variables.put(UrlVariables.GAME_CLASS, TestConstants.GAME_CLASS);
         variables.put(UrlVariables.GROUP, TestConstants.GROUP);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn(TestConstants.CALENDAR_STRING);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables)))
+                .thenReturn(TestConstants.CALENDAR_STRING);
         swissunihockeyAPIClient.getCalendarForGroup(TestConstants.SEASON, TestConstants.LEAGUE, TestConstants.GAME_CLASS, TestConstants.GROUP);
         verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables));
     }
@@ -144,14 +160,16 @@ public class SwissunihockeyAPIClientTest {
         variables.put(UrlVariables.LEAGUE, TestConstants.LEAGUE);
         variables.put(UrlVariables.GAME_CLASS, TestConstants.GAME_CLASS);
         variables.put(UrlVariables.GROUP, TestConstants.GROUP);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables))).thenReturn("");
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CALENDAR_FOR_GROUP), eq(String.class), eq(variables)))
+                .thenReturn("");
         swissunihockeyAPIClient.getCalendarForGroup(TestConstants.SEASON, TestConstants.LEAGUE, TestConstants.GAME_CLASS, TestConstants.GROUP);
     }
 
     @Test
     public void getClubsOfSeasonCallsSwissunihockeyAPI() {
         variables.put(UrlVariables.SEASON, TestConstants.SEASON);
-        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CLUBS_OF_SEASON), eq(ClubsResponse.class), eq(variables))).thenReturn(sampleClubsResponse);
+        when(mockedRestTemplate.getForObject(eq(UrlTemplates.GET_CLUBS_OF_SEASON), eq(ClubsResponse.class), eq(variables)))
+                .thenReturn(sampleClubsResponse);
         swissunihockeyAPIClient.getClubsOfSeason(TestConstants.SEASON);
         verify(mockedRestTemplate).getForObject(eq(UrlTemplates.GET_CLUBS_OF_SEASON), eq(ClubsResponse.class), eq(variables));
     }

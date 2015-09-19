@@ -40,7 +40,8 @@ public class PDFGeneratorTest {
 
     @BeforeClass
     public static void setup() throws IOException, ParserException {
-        InputStream inputStream = new FileInputStream(new File(PDFGeneratorTest.class.getClassLoader().getResource("team-calendar-response.txt").getFile()));
+        InputStream inputStream = new FileInputStream(
+                new File(PDFGeneratorTest.class.getClassLoader().getResource("team-calendar-response.txt").getFile()));
         CalendarBuilder builder = new CalendarBuilder();
         sampleTeamCalendar = builder.build(inputStream);
     }

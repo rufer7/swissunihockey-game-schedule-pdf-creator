@@ -54,7 +54,7 @@ public class GameScheduleController {
             LOG.error("Error occurred while loading pdf file '" + fileName + "' from file system", e);
             throw new ServePDFException();
         } finally {
-            gameScheduleService.deleteUnusedFiles();
+            gameScheduleService.deleteOldUnusedFiles();
         }
     }
 }

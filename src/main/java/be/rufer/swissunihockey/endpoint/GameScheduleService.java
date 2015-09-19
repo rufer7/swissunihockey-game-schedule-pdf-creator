@@ -35,6 +35,7 @@ public class GameScheduleService {
     private static final Logger LOG = LoggerFactory.getLogger(GameScheduleService.class);
     private static final String PDF_FILE_PATTERN = ".*-[0-9]{10,15}.pdf";
     private static final String ROOT_DIRECTORY = "./";
+    private static final long FIFTEEN_MINUTES_IN_MILISECONDS = 1000L * 60L * 15L;
 
     protected static Map<String, String> clubs;
 
@@ -55,22 +56,30 @@ public class GameScheduleService {
         return pdfGenerator.createPDFBasedCalendarForTeam(teamCalendar, clubs.get(clubId));
     }
 
-    public void deleteUnusedFiles() {
-        LOG.info("Delete all unused files in directory ./");
+    public void deleteOldUnusedFiles() {
+        LOG.info("Delete all files older than 15 minutes in directory ./");
         File dir = new FileSystemResource(ROOT_DIRECTORY).getFile();
         Assert.state(dir.isDirectory());
 
         File[] files = dir.listFiles();
-        for (File file : files) {
-            if (isGeneratedPdfFile(file)) {
-                if (file.delete()) {
-                    LOG.info("File with name '{}' deleted", file.getName());
+        if (null != files) {
+            for (File file : files) {
+                if (isPdfFileAndOlderThanQuarterOfAnHour(file)) {
+                    if (file.delete()) {
+                        LOG.info("File with name '{}' deleted", file.getName());
+                    }
                 }
             }
         }
     }
 
-    private boolean isGeneratedPdfFile(File file) {
-        return file.getName().matches(PDF_FILE_PATTERN);
+    private boolean isPdfFileAndOlderThanQuarterOfAnHour(File file) {
+        return file.getName().matches(PDF_FILE_PATTERN) && isOlderThanQuarterOfAnHour(file);
+    }
+
+    private boolean isOlderThanQuarterOfAnHour(File file) {
+        long now = java.util.Calendar.getInstance().getTimeInMillis();
+        long diff = now - file.lastModified();
+        return diff > FIFTEEN_MINUTES_IN_MILISECONDS;
     }
 }
