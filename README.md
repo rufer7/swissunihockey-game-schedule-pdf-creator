@@ -12,11 +12,17 @@ A web application that generates and serves game schedules as PDF documents
 This application consumes the [swissunihockey API v2](https://api-v2.swissunihockey.ch/api/doc)
 
 
+## Deployment to Heroku
+
+Application will be deployed autmatically on every commit to master (i.e. release)
+
+For information about the deployment to heroku have a look at [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java#set-up)
+
 ## Deployment to cloudfoundry
 
 ### Maven
 
-The application could be automatically deployed to cloudfoundry with the [cf-maven-plugin](https://github.com/cloudfoundry/cf-java-client/tree/master/cloudfoundry-maven-plugin) build the applicaiton with the maven profile `deploy-to-cloudfoundry`. As a prerequisite the server has to be specified in the `settings.xml`(`~\m2\settings.xml`) file.
+The application could be automatically deployed to cloudfoundry with the [cf-maven-plugin](https://github.com/cloudfoundry/cf-java-client/tree/master/cloudfoundry-maven-plugin) build the application (`clean` `install`) with the maven profile `deploy-to-cloudfoundry`. As a prerequisite the server has to be specified in the `settings.xml`(`~\m2\settings.xml`) file.
 
 ```
     <settings>

@@ -98,9 +98,27 @@ services.factory('PDFGeneratorService', function ($http) {
         getPDF: function (clubId, teamId) {
             return $http.get('/api/clubs/' + clubId + '/teams/' + teamId + '/game-schedule', { responseType: 'arraybuffer' })
                 .success(function (data) {
-                    var file = new Blob([data], { type: 'application/pdf' });
-                    var fileURL = URL.createObjectURL(file);
-                    window.open(fileURL, '_blank');
+
+                    var ie = navigator.userAgent.match(/MSIE\s([\d.]+)/),
+                        ie11 = navigator.userAgent.match(/Trident\/7.0/) && navigator.userAgent.match(/rv:11/),
+                        ieEDGE = navigator.userAgent.match(/Edge/g),
+                        ieVer = (ie ? ie[1] : (ie11 ? 11 : (ieEDGE ? 12 : -1)));
+
+                    if (ie && ieVer < 10) {
+                        console.log("No blobs on IE ver<10");
+                        return;
+                    }
+
+                    file = new Blob([data], {type: 'application/pdf'});
+
+                    if (ieVer > -1) {
+                        window.navigator.msSaveBlob(file, 'Spielplan.pdf');
+
+                    } else {
+                        var file = new Blob([data], {type: 'application/pdf'});
+                        var fileURL = URL.createObjectURL(file);
+                        window.open(fileURL);
+                    }
                 });
         }
     }
