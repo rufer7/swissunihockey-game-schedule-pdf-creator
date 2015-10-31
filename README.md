@@ -14,14 +14,9 @@ This application consumes the [swissunihockey API v2](https://api-v2.swissunihoc
 
 ## Deployment to Heroku
 
-### Commands
+Application will be deployed autmatically on every commit to master (i.e. release)
 
-* `heroku login`
-* Navigate to local working copy directory
-* `heroku create swissunihockey-pdf`
-* `git push heroku master`
-
-For more information about the deployment to heroku have a look at [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java#set-up)
+For information about the deployment to heroku have a look at [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java#set-up)
 
 ## Deployment to cloudfoundry
 
