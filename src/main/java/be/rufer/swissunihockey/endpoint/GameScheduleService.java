@@ -35,7 +35,7 @@ public class GameScheduleService {
     private static final Logger LOG = LoggerFactory.getLogger(GameScheduleService.class);
     private static final String PDF_FILE_PATTERN = ".*-[0-9]{10,15}.pdf";
     private static final String ROOT_DIRECTORY = "./";
-    private static final long FIFTEEN_MINUTES_IN_MILISECONDS = 1000L * 60L * 15L;
+    private static final long FIFTEEN_MINUTES_IN_MILLISECONDS = 1000L * 60L * 15L;
 
     protected static Map<String, String> clubs;
 
@@ -80,6 +80,6 @@ public class GameScheduleService {
     private boolean isOlderThanQuarterOfAnHour(File file) {
         long now = java.util.Calendar.getInstance().getTimeInMillis();
         long diff = now - file.lastModified();
-        return diff > FIFTEEN_MINUTES_IN_MILISECONDS;
+        return diff > FIFTEEN_MINUTES_IN_MILLISECONDS;
     }
 }
