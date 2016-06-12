@@ -7,9 +7,9 @@
 A web application that generates and serves game schedules as PDF documents
 
 
-## Swissunihockey API
+## Swiss unihockey API
 
-This application consumes the [swissunihockey API v2](https://api-v2.swissunihockey.ch/api/doc)
+This application consumes the [swiss unihockey API v2](https://api-v2.swissunihockey.ch/api/doc)
 
 
 ## Deployment to Heroku

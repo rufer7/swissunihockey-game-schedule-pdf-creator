@@ -1,0 +1,15 @@
+a:link {
+    color: #FFFFFF;
+}
+
+.bar.bar-dark.bar-footer {
+    background-color: #ee3124;
+}
+
+.bar.bar-positive {
+    background-color: #000;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
