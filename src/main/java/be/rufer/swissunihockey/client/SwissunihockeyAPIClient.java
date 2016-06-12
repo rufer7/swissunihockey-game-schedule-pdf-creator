@@ -49,7 +49,7 @@ public class SwissunihockeyAPIClient {
     public Calendar getCalendarForTeam(String teamId) {
         HashMap<String, String> variables = new HashMap<>();
         variables.put(UrlVariables.TEAM_ID, teamId);
-        LOG.info("Get calendar for team from swissunihockey API");
+        LOG.info("Get calendar for team from swiss unihockey API");
         String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_TEAM, String.class, variables);
         LOG.debug("GET {} - {}", UrlTemplates.GET_CALENDAR_FOR_TEAM, response);
         return convertToCalendar(response);
@@ -62,7 +62,7 @@ public class SwissunihockeyAPIClient {
     public Calendar getCalendarForClub(String clubId) {
         HashMap<String, String> variables = new HashMap<>();
         variables.put(UrlVariables.CLUB_ID, clubId);
-        LOG.info("Get calendar for club from swissunihockey API");
+        LOG.info("Get calendar for club from swiss unihockey API");
         String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_CLUB, String.class, variables);
         LOG.debug("GET {} - {}", UrlTemplates.GET_CALENDAR_FOR_CLUB, response);
         return convertToCalendar(response);
@@ -81,7 +81,7 @@ public class SwissunihockeyAPIClient {
         variables.put(UrlVariables.LEAGUE, league);
         variables.put(UrlVariables.GAME_CLASS, gameClass);
         variables.put(UrlVariables.GROUP, group);
-        LOG.info("Get calendar for group from swissunihockey API");
+        LOG.info("Get calendar for group from swiss unihockey API");
         String response = restTemplate.getForObject(UrlTemplates.GET_CALENDAR_FOR_GROUP, String.class, variables);
         LOG.debug("GET {} - {}", UrlTemplates.GET_CALENDAR_FOR_GROUP, response);
         return convertToCalendar(response);

@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-        reason = "Could not convert calendar domain returned from swissunihockey API v2 to calendar")
+        reason = "Could not convert calendar domain returned from swiss unihockey API v2 to calendar")
 public class CalendarConversionException extends RuntimeException {
 
 }
