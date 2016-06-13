@@ -4,10 +4,12 @@ a:link {
 
 .bar.bar-dark.bar-footer {
     background-color: #ee3124;
+	border-color: #ee3124;
 }
 
 .bar.bar-positive {
     background-color: #000;
+	border-color: #000;
 }
 
 body {
