@@ -19,7 +19,7 @@ public interface TestConstants {
 
     String TEAM_ID = "428660";
     String CLUB_ID = "441388";
-    String SEASON = "2015";
+    String SEASON = "2016";
     String LEAGUE = "1";
     String GAME_CLASS = "11";
     String GROUP = "Gruppe 1";
