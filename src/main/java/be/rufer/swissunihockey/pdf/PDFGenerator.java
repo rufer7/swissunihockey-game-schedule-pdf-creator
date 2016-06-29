@@ -56,6 +56,7 @@ public class PDFGenerator {
     private static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy HH:mm";
     private static final int ZERO = 0;
     private static PDFont font;
+    private static final String TEAM_DELIMITER = " - ";
 
     public PDFGenerator() {
         font = PDType1Font.HELVETICA_BOLD;
@@ -146,9 +147,9 @@ public class PDFGenerator {
             }
             String summary = properties.getProperty(Property.SUMMARY).getValue();
             contentStream.moveTextPositionByAmount(100, ZERO);
-            contentStream.drawString(summary.substring(0, summary.indexOf(" - ")));
+            contentStream.drawString(getHomeTeamName(summary));
             contentStream.moveTextPositionByAmount(220, ZERO);
-            contentStream.drawString(summary.substring(summary.indexOf(" - ") + 3));
+            contentStream.drawString(getAwayTeamName(summary));
             contentStream.moveTextPositionByAmount(220, ZERO);
             contentStream.drawString(properties.getProperty(Property.LOCATION).getValue());
             contentStream.endText();
@@ -156,6 +157,22 @@ public class PDFGenerator {
             yPosition -= LINE_DISTANCE;
         }
         LOG.info("Calendar data successfully written to content stream");
+    }
+
+    private String getHomeTeamName(String summary) {
+        if (summary.contains(TEAM_DELIMITER))
+        {
+            return summary.substring(0, summary.indexOf(TEAM_DELIMITER));
+        }
+        return summary;
+    }
+
+    private String getAwayTeamName(String summary) {
+        if (summary.contains(TEAM_DELIMITER))
+        {
+            return summary.substring(summary.indexOf(TEAM_DELIMITER) + 3);
+        }
+        return summary;
     }
 
     private String formatDate(String dateAsString) {
