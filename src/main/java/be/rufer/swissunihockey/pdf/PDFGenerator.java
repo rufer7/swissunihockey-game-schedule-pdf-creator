@@ -16,10 +16,7 @@
 package be.rufer.swissunihockey.pdf;
 
 import be.rufer.swissunihockey.pdf.exception.PDFCreationException;
-import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.Component;
-import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.PropertyList;
+import net.fortuna.ical4j.model.*;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -31,10 +28,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Generator class that provides methods for creation of PDF documents.
@@ -52,11 +51,13 @@ public class PDFGenerator {
     private static final int Y_ALIGNMENT_OVERVIEW = 520;
     private static final int LINE_DISTANCE = 15;
     private static final int ROTATION = 90;
-    private static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss";
-    private static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy HH:mm";
     private static final int ZERO = 0;
-    private static PDFont font;
+    private static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss'Z'";
+    private static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy HH:mm";
     private static final String TEAM_DELIMITER = " - ";
+    private static PDFont font;
+    private static ZoneId ZONE_ID_EUROPE_ZURICH = ZoneId.of("Europe/Zurich");
+    private static ZoneId ZONE_ID_UTC = ZoneId.of("UTC");
 
     public PDFGenerator() {
         font = PDType1Font.HELVETICA_BOLD;
@@ -176,15 +177,21 @@ public class PDFGenerator {
     }
 
     private String formatDate(String dateAsString) {
-        SimpleDateFormat gameScheduleDateFormat = new SimpleDateFormat(GAME_SCHEDULE_DATE_FORMAT);
-        Date date;
+        ZonedDateTime zonedDateTime = parseDate(dateAsString);
+
+        LocalDateTime timeZoneAwareDateTime = LocalDateTime.ofInstant(zonedDateTime.toInstant(), ZONE_ID_EUROPE_ZURICH);
+
+        return timeZoneAwareDateTime.format(DateTimeFormatter.ofPattern(GAME_SCHEDULE_DATE_FORMAT));
+    }
+
+    private ZonedDateTime parseDate(String dateAsString) {
         try {
-            date = new SimpleDateFormat(CALENDAR_DATE_FORMAT).parse(dateAsString);
-        } catch (ParseException e) {
+            LocalDateTime utcDateTime = LocalDateTime.parse(dateAsString, DateTimeFormatter.ofPattern(CALENDAR_DATE_FORMAT));
+            return ZonedDateTime.of(utcDateTime, ZONE_ID_UTC);
+        } catch (DateTimeParseException e) {
             LOG.error("Error occurred while parsing string representation of date: {}", dateAsString);
             throw new PDFCreationException();
         }
-        return gameScheduleDateFormat.format(date);
     }
 
     protected String generateUniqueFileName(String prefix) {

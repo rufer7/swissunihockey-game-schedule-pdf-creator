@@ -12,6 +12,11 @@ a:link {
 	border-color: #000;
 }
 
+.button.button-dark {
+    background-color: #000;
+    border-color: #000;
+}
+
 body {
     font-family: Helvetica, Arial, sans-serif;
 }
