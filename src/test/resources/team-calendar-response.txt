@@ -3,245 +3,156 @@ VERSION:2.0
 PRODID:icalendar-ruby
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852883(swissunihockey.ch)
-DTSTART:20150919T190000
-DTEND:20150919T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 1\, Saison 2015/16
-GEO:7.5750850000000005;47.09233833333334
-LOCATION:Sportanlage Grossmatt Kirchberg BE
-SUMMARY:SV Wiler-Ersigen - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852883
+DTSTAMP:20160729T070022Z
+UID:game-887199(swissunihockey.ch)
+DTSTART:20160925T123000Z
+DTEND:20160925T141500Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 1\, Saison 2016/17
+GEO:7.715658333333334;47.187
+LOCATION:Sporthalle Mittelholz Herzogenbuchsee
+SUMMARY:UHC W.W. Schüpfen-Busswil - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887199
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852888(swissunihockey.ch)
-DTSTART:20150925T200000
-DTEND:20150925T214500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 2\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - Waldkirch-St. Gallen
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852888
+DTSTAMP:20160729T070022Z
+UID:game-887204(swissunihockey.ch)
+DTSTART:20161002T144500Z
+DTEND:20161002T163000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 2\, Saison 2016/17
+GEO:7.644766743977867;47.01533203125
+LOCATION:Preisegg Hasle-Rüegsau
+SUMMARY:Racoons Herzogenbuchsee - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887204
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852894(swissunihockey.ch)
-DTSTART:20150927T190000
-DTEND:20150927T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 3\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - Chur Unihockey
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852894
+DTSTAMP:20160729T070022Z
+UID:game-887205(swissunihockey.ch)
+DTSTART:20161009T080000Z
+DTEND:20161009T094500Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 3\, Saison 2016/17
+GEO:7.910354666666667;47.345996666666665
+LOCATION:Giroud Olma - Turnhallen BBZ Olten
+SUMMARY:Olten Zofingen II - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887205
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852898(swissunihockey.ch)
-DTSTART:20151004T170000
-DTEND:20151004T184500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 4\, Saison 2015/16
-GEO:8.725916666666667;47.36033166666667
-LOCATION:Buchholz Uster
-SUMMARY:UHC Uster - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852898
+DTSTAMP:20160729T070022Z
+UID:game-887212(swissunihockey.ch)
+DTSTART:20161022T144500Z
+DTEND:20161022T163000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 4\, Saison 2016/17
+GEO:7.498849487304684;47.0142578125
+LOCATION:RAIFFEISEN unihockeyARENA Urtenen Schönbühl
+SUMMARY:UHC Bowil - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887212
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852906(swissunihockey.ch)
-DTSTART:20151011T190000
-DTEND:20151011T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 5\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - Kloten-Bülach Jets
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852906
+DTSTAMP:20160729T070022Z
+UID:game-887214(swissunihockey.ch)
+DTSTART:20161106T111500Z
+DTEND:20161106T130000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 5\, Saison 2016/17
+GEO:7.743465666666666;46.97507333333333
+LOCATION:Ballsporthalle Oberemmental (BOE) Zollbrück
+SUMMARY:Hornets R.Moosseedorf Worblental II - UHT Arni
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887214
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852908(swissunihockey.ch)
-DTSTART:20151017T190000
-DTEND:20151017T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 6\, Saison 2015/16
+DTSTAMP:20160729T070022Z
+UID:game-887220(swissunihockey.ch)
+DTSTART:20161113T154500Z
+DTEND:20161113T173000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 6\, Saison 2016/17
+GEO:7.498849487304684;47.0142578125
+LOCATION:RAIFFEISEN unihockeyARENA Urtenen Schönbühl
+SUMMARY:Hornets R.Moosseedorf Worblental II - Gürbetal RK Belp
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887220
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20160729T070022Z
+UID:game-887223(swissunihockey.ch)
+DTSTART:20161120T133000Z
+DTEND:20161120T151500Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 7\, Saison 2016/17
 GEO:7.6286138333333335;46.922333333333334
 LOCATION:Espace-Arena Biglen
-SUMMARY:Tigers Langnau - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852908
+SUMMARY:UHT Uetigen - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887223
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852918(swissunihockey.ch)
-DTSTART:20151024T193000
-DTEND:20151024T211500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 7\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - Floorball Köniz
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852918
+DTSTAMP:20160729T070022Z
+UID:game-887226(swissunihockey.ch)
+DTSTART:20161204T111500Z
+DTEND:20161204T130000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 8\, Saison 2016/17
+GEO:7.3787183333333335;47.038195
+LOCATION:Sporthalle Schüpfen
+SUMMARY:Hornets R.Moosseedorf Worblental II - UHC W.W. Schüpfen-Busswil
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887226
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852924(swissunihockey.ch)
-DTSTART:20151114T190000
-DTEND:20151114T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 8\, Saison 2015/16
-GEO:8.771795;47.478161666666665
-LOCATION:Oberseen Winterthur
-SUMMARY:HC Rychenberg Winterthur - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852924
+DTSTAMP:20160729T070022Z
+UID:game-887230(swissunihockey.ch)
+DTSTART:20170108T111500Z
+DTEND:20170108T130000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 9\, Saison 2016/17
+GEO:7.499666849772134;46.899499511718666
+LOCATION:Dreifachsporthalle Neumatt Belp
+SUMMARY:Hornets R.Moosseedorf Worblental II - Racoons Herzogenbuchsee
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887230
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852930(swissunihockey.ch)
-DTSTART:20151122T190000
-DTEND:20151122T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 9\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - Grasshopper Club Zürich
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852930
+DTSTAMP:20160729T070022Z
+UID:game-887233(swissunihockey.ch)
+DTSTART:20170114T090000Z
+DTEND:20170114T104500Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 10\, Saison 2016/17
+GEO:7.6286138333333335;46.922333333333334
+LOCATION:Espace-Arena Biglen
+SUMMARY:Hornets R.Moosseedorf Worblental II - Olten Zofingen II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887233
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852934(swissunihockey.ch)
-DTSTART:20151128T170000
-DTEND:20151128T184500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 10\, Saison 2015/16
-GEO:7.614357999999999;46.75799166666666
-LOCATION:MUR Thun
-SUMMARY:UHC Thun - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852934
+DTSTAMP:20160729T070022Z
+UID:game-887239(swissunihockey.ch)
+DTSTART:20170122T133000Z
+DTEND:20170122T151500Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 11\, Saison 2016/17
+GEO:7.715658333333334;47.187
+LOCATION:Sporthalle Mittelholz Herzogenbuchsee
+SUMMARY:Hornets R.Moosseedorf Worblental II - UHC Bowil
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887239
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852942(swissunihockey.ch)
-DTSTART:20151205T193000
-DTEND:20151205T211500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 11\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - UHC Alligator Malans
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852942
+DTSTAMP:20160729T070022Z
+UID:game-887244(swissunihockey.ch)
+DTSTART:20170205T154500Z
+DTEND:20170205T173000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 12\, Saison 2016/17
+GEO:7.910354666666667;47.345996666666665
+LOCATION:Giroud Olma - Turnhallen BBZ Olten
+SUMMARY:UHT Arni - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887244
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852949(swissunihockey.ch)
-DTSTART:20151206T180000
-DTEND:20151206T194500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 12\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - SV Wiler-Ersigen
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852949
+DTSTAMP:20160729T070022Z
+UID:game-887245(swissunihockey.ch)
+DTSTART:20170219T090000Z
+DTEND:20170219T104500Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 13\, Saison 2016/17
+LOCATION:
+SUMMARY:Gürbetal RK Belp - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887245
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852954(swissunihockey.ch)
-DTSTART:20151212T190000
-DTEND:20151212T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 13\, Saison 2015/16
-GEO:9.368361666666667;47.41249166666667
-LOCATION:Sporthalle Tal der Demut St. Gallen
-SUMMARY:Waldkirch-St. Gallen - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852954
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852960(swissunihockey.ch)
-DTSTART:20151219T190000
-DTEND:20151219T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 14\, Saison 2015/16
-GEO:9.5225331624349;46.85649820963533
-LOCATION:Gewerbliche Berufsschule Chur
-SUMMARY:Chur Unihockey - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852960
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852964(swissunihockey.ch)
-DTSTART:20151220T180000
-DTEND:20151220T194500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 15\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - UHC Uster
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852964
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852972(swissunihockey.ch)
-DTSTART:20160103T170000
-DTEND:20160103T184500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 16\, Saison 2015/16
-GEO:8.57791646321615;47.462333170573
-LOCATION:Sporthalle Ruebisbach Kloten
-SUMMARY:Kloten-Bülach Jets - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852972
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852974(swissunihockey.ch)
-DTSTART:20160110T190000
-DTEND:20160110T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 17\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - Tigers Langnau
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852974
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852984(swissunihockey.ch)
-DTSTART:20160115T193000
-DTEND:20160115T211500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 18\, Saison 2015/16
-GEO:0.0;0.0
-LOCATION:Sporthallen Weissenstein Bern
-SUMMARY:Floorball Köniz - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852984
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852990(swissunihockey.ch)
-DTSTART:20160124T180000
-DTEND:20160124T194500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 19\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - HC Rychenberg Winterthur
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852990
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-852996(swissunihockey.ch)
-DTSTART:20160213T190000
-DTEND:20160213T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 20\, Saison 2015/16
-GEO:8.510927833333334;47.381600000000006
-LOCATION:Sporthalle Hardau Zürich
-SUMMARY:Grasshopper Club Zürich - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=852996
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-853000(swissunihockey.ch)
-DTSTART:20160214T190000
-DTEND:20160214T204500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 21\, Saison 2015/16
-GEO:7.7626911666666665;47.03171
-LOCATION:Forum Sumiswald
-SUMMARY:UHC Grünenmatt - UHC Thun
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=853000
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20150716T132459Z
-UID:game-853008(swissunihockey.ch)
-DTSTART:20160220T180000
-DTEND:20160220T194500
-DESCRIPTION:Herren NLA\, Gruppe 1\, Runde 22\, Saison 2015/16
-GEO:9.526980666666667;47.00566333333334
-LOCATION:Turnhalle Lust Maienfeld
-SUMMARY:UHC Alligator Malans - UHC Grünenmatt
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=853008
+DTSTAMP:20160729T070022Z
+UID:game-887252(swissunihockey.ch)
+DTSTART:20170304T154500Z
+DTEND:20170304T173000Z
+DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 14\, Saison 2016/17
+GEO:7.498849487304684;47.0142578125
+LOCATION:RAIFFEISEN unihockeyARENA Urtenen Schönbühl
+SUMMARY:Hornets R.Moosseedorf Worblental II - UHT Uetigen
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=887252
 END:VEVENT
 END:VCALENDAR
