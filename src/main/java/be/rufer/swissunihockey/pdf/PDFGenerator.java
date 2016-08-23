@@ -49,6 +49,7 @@ public class PDFGenerator {
     private static final int Y_ALIGNMENT_TITLE = 550;
     private static final int Y_ALIGNMENT_GAMES = 490;
     private static final int Y_ALIGNMENT_OVERVIEW = 520;
+    private static final int Y_ALIGNMENT_FOOTER = 30;
     private static final int LINE_DISTANCE = 15;
     private static final int ROTATION = 90;
     private static final int ZERO = 0;
@@ -89,6 +90,7 @@ public class PDFGenerator {
             writeTitle(contentStream, PDFTemplates.TEAM_SCHEDULE_TITLE, teamName);
             writeTeamOverview(contentStream, calendar);
             writeTeamCalendarContent(contentStream, calendar);
+            writeFooter(contentStream, PDFTemplates.FOOTER_TEXT);
 
             contentStream.close();
             document.save(fileName);
@@ -192,6 +194,14 @@ public class PDFGenerator {
             LOG.error("Error occurred while parsing string representation of date: {}", dateAsString);
             throw new PDFCreationException();
         }
+    }
+
+    private void writeFooter(PDPageContentStream contentStream, String footerText) throws IOException {
+        contentStream.setFont(font, CONTENT_FONT_SIZE);
+        contentStream.beginText();
+        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_FOOTER);
+        contentStream.drawString(footerText);
+        contentStream.endText();
     }
 
     protected String generateUniqueFileName(String prefix) {
