@@ -80,13 +80,26 @@ var services = angular.module('gameSchedulePDFCreatorApp.services', []);
 services.factory('SwissunihockeyAPIService', function ($http) {
     return {
         getClubs: function () {
-            return $http.get("/clubs").success(function (data) {
+            var date = new Date();
+            var season = date.getFullYear();
+            if (date.getMonth() < 5)
+            {
+                season -= 1;
+            }
+            console.log("/clubs?season=" + season);
+            return $http.get("/clubs?season=" + season).success(function (data) {
                 return data.entries;
             });
         },
         getTeams: function (clubId) {
-            console.log("/teams?club_id=" + clubId + "&mode=by_club");
-            return $http.get("/teams?club_id=" + clubId + "&mode=by_club").success(function (data) {
+            var date = new Date();
+            var season = date.getFullYear();
+            if (date.getMonth() < 5)
+            {
+                season -= 1;
+            }
+            console.log("/teams?club_id=" + clubId + "&season=" + season + "&mode=by_club");
+            return $http.get("/teams?club_id=" + clubId + "&season=" + season + "&mode=by_club").success(function (data) {
                 return data.entries;
             })
         }
