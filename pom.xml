@@ -52,7 +52,6 @@
         <webjars.bootstrap.version>3.3.4</webjars.bootstrap.version>
         <webjars.jquery.version>2.1.4</webjars.jquery.version>
         <webjars.angularjs.version>1.3.8</webjars.angularjs.version>
-        <webjars.ionic.version>1.0.0-beta.14</webjars.ionic.version>
         <spring.cloud.starter.zuul.version>1.0.3.RELEASE</spring.cloud.starter.zuul.version>
         <ical4j.version>1.0.2</ical4j.version>
         <apache.pdf.box.version>1.8.9</apache.pdf.box.version>
@@ -74,11 +73,6 @@
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
             <version>${webjars.angularjs.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>ionic</artifactId>
-            <version>${webjars.ionic.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
