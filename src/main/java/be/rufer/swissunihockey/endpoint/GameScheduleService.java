@@ -47,7 +47,14 @@ public class GameScheduleService {
 
     @PostConstruct
     public void initClubMap() {
-        clubs = swissunihockeyAPIClient.getClubsOfSeason(String.valueOf(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)));
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+
+        int season = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        if (calendar.get(java.util.Calendar.MONTH) < 5)
+        {
+            season -= 1;
+        }
+        clubs = swissunihockeyAPIClient.getClubsOfSeason(String.valueOf(season));
     }
 
     public String createPDFGameScheduleForTeam(String clubId, String teamId) {

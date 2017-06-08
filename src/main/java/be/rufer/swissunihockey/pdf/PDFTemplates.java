@@ -17,5 +17,6 @@ package be.rufer.swissunihockey.pdf;
 
 public interface PDFTemplates {
 
-    public String TEAM_SCHEDULE_TITLE = "Spielplan - %s";
+    String TEAM_SCHEDULE_TITLE = "Spielplan - %s";
+    String FOOTER_TEXT = "Spieldaten und Anspielzeiten ohne Gewähr. Aktuelle Informationen sind auf www.swissunihockey.ch zu finden.";
 }
