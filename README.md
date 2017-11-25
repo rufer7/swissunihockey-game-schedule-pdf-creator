@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/rufer7/swissunihockey-game-schedule-pdf-creator/blob/master/LICENSE)
 
 
-A web application that generates and serves game schedules as PDF documents
+A web application that generates and serves swiss unihockey game schedules as PDF documents
 
 
 ## Swiss unihockey API
@@ -22,7 +22,7 @@ For information about the deployment to heroku have a look at [Getting Started w
 
 ### Maven
 
-The application could be automatically deployed to cloudfoundry with the [cf-maven-plugin](https://github.com/cloudfoundry/cf-java-client/tree/master/cloudfoundry-maven-plugin) build the application (`clean` `install`) with the maven profile `deploy-to-cloudfoundry`. As a prerequisite the server has to be specified in the `settings.xml`(`~\m2\settings.xml`) file.
+The application can be automatically deployed to cloudfoundry with the [cf-maven-plugin](https://github.com/cloudfoundry/cf-java-client/tree/master/cloudfoundry-maven-plugin). To do so build the application (`clean` `install`) with the maven profile `deploy-to-cloudfoundry`. As a prerequisite the server has to be specified in the `settings.xml`(`~\m2\settings.xml`) file.
 
 ```
     <settings>
