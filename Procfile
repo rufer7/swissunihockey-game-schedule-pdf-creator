@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/game-schedule-pdf-generator-1.0.12.jar
+web: java -Dserver.port=$PORT -jar target/game-schedule-pdf-generator-1.0.13.jar
