@@ -43,8 +43,8 @@ public class GameScheduleServiceTest {
 
     private static final String SAMPLE_FILE_NAME = "Hornets R.Moosseedorf Worblental-1437314588.pdf";
     private static final String FILE_FORMAT = "UTF-8";
-    private static final String ACTUAL_YEAR = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
     private static final String ROOT_DIRECTORY = "./";
+    private String actualSeason;
 
     @InjectMocks
     private GameScheduleService gameScheduleService;
@@ -58,19 +58,28 @@ public class GameScheduleServiceTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
+        
+        Calendar calendar = Calendar.getInstance();
+
+        int season = Calendar.getInstance().get(Calendar.YEAR);
+        if (calendar.get(java.util.Calendar.MONTH) < 5)
+        {
+            season -= 1;
+        }
+        actualSeason = String.valueOf(season);
     }
 
     @Test
     public void postConstructMethodCallsSwissunihockeyAPIClientForGettingClubsOfActualSeason() {
         gameScheduleService.initClubMap();
-        verify(swissunihockeyAPIClient).getClubsOfSeason(ACTUAL_YEAR);
+        verify(swissunihockeyAPIClient).getClubsOfSeason(actualSeason);
     }
 
     @Test
     public void postConstructMethodInitializesClubMapWithDataFromSwissunihockeyAPIClient() {
         Map<String, String> clubs = new HashMap<>();
         clubs.put(TestConstants.CLUB_ID, TestConstants.CLUB_NAME);
-        when(swissunihockeyAPIClient.getClubsOfSeason(ACTUAL_YEAR)).thenReturn(clubs);
+        when(swissunihockeyAPIClient.getClubsOfSeason(actualSeason)).thenReturn(clubs);
         gameScheduleService.initClubMap();
         assertNotNull(GameScheduleService.clubs);
         assertEquals(clubs, GameScheduleService.clubs);
