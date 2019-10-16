@@ -17,12 +17,13 @@ package be.rufer.swissunihockey.pdf;
 
 import be.rufer.swissunihockey.pdf.exception.PDFCreationException;
 import net.fortuna.ical4j.model.*;
-import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.util.Matrix;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -76,7 +77,7 @@ public class PDFGenerator {
 
     private String writeTeamCalendarToPDFAndSave(PDDocument document, Calendar calendar, String teamName) throws IOException {
         PDPage page = new PDPage();
-        page.setMediaBox(PDPage.PAGE_SIZE_A4);
+        page.setMediaBox(PDRectangle.A4);
         page.setRotation(ROTATION);
         document.addPage(page);
 
@@ -85,7 +86,7 @@ public class PDFGenerator {
         PDPageContentStream contentStream;
         try {
             contentStream = new PDPageContentStream(document, page);
-            contentStream.concatenate2CTM(ZERO, 1, -1, ZERO, page.findMediaBox().getWidth(), ZERO);
+            contentStream.transform(new Matrix(ZERO, 1, -1, ZERO, page.getMediaBox().getWidth(), ZERO));
 
             writeTitle(contentStream, PDFTemplates.TEAM_SCHEDULE_TITLE, teamName);
             writeTeamOverview(contentStream, calendar);
@@ -95,10 +96,7 @@ public class PDFGenerator {
             contentStream.close();
             document.save(fileName);
         } catch (IOException e) {
-            LOG.error("Error occurred while creating PDF document", e);
-            throw new PDFCreationException();
-        } catch (COSVisitorException e) {
-            LOG.error("Error occurred while saving the PDF document", e);
+            LOG.error("Error occurred while creating or saving the PDF document", e);
             throw new PDFCreationException();
         } finally {
             document.close();
@@ -109,16 +107,16 @@ public class PDFGenerator {
     private void writeTitle(PDPageContentStream contentStream, String template, String... templateVariables) throws IOException {
         contentStream.setFont(font, TITLE_FONT_SIZE);
         contentStream.beginText();
-        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_TITLE);
-        contentStream.drawString(String.format(template, templateVariables));
+        contentStream.newLineAtOffset(X_ALIGNMENT, Y_ALIGNMENT_TITLE);
+        contentStream.showText(String.format(template, templateVariables));
         contentStream.endText();
     }
 
     private void writeTeamOverview(PDPageContentStream contentStream, Calendar calendar) throws IOException {
         contentStream.setFont(font, OVERVIEW_FONT_SIZE);
         contentStream.beginText();
-        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_OVERVIEW);
-        contentStream.drawString(getOverviewText(calendar));
+        contentStream.newLineAtOffset(X_ALIGNMENT, Y_ALIGNMENT_OVERVIEW);
+        contentStream.showText(getOverviewText(calendar));
         contentStream.endText();
     }
 
@@ -144,17 +142,17 @@ public class PDFGenerator {
             PropertyList properties = ((Component)component).getProperties();
 
             contentStream.beginText();
-            contentStream.moveTextPositionByAmount(X_ALIGNMENT, yPosition);
+            contentStream.newLineAtOffset(X_ALIGNMENT, yPosition);
             if (properties.getProperty(Property.DTSTART) != null) {
-                contentStream.drawString(formatDate(properties.getProperty(Property.DTSTART).getValue()));
+                contentStream.showText(formatDate(properties.getProperty(Property.DTSTART).getValue()));
             }
             String summary = properties.getProperty(Property.SUMMARY).getValue();
-            contentStream.moveTextPositionByAmount(100, ZERO);
-            contentStream.drawString(getHomeTeamName(summary));
-            contentStream.moveTextPositionByAmount(220, ZERO);
-            contentStream.drawString(getAwayTeamName(summary));
-            contentStream.moveTextPositionByAmount(220, ZERO);
-            contentStream.drawString(properties.getProperty(Property.LOCATION).getValue());
+            contentStream.newLineAtOffset(100, ZERO);
+            contentStream.showText(getHomeTeamName(summary));
+            contentStream.newLineAtOffset(220, ZERO);
+            contentStream.showText(getAwayTeamName(summary));
+            contentStream.newLineAtOffset(220, ZERO);
+            contentStream.showText(properties.getProperty(Property.LOCATION).getValue());
             contentStream.endText();
 
             yPosition -= LINE_DISTANCE;
@@ -199,8 +197,8 @@ public class PDFGenerator {
     private void writeFooter(PDPageContentStream contentStream, String footerText) throws IOException {
         contentStream.setFont(font, CONTENT_FONT_SIZE);
         contentStream.beginText();
-        contentStream.moveTextPositionByAmount(X_ALIGNMENT, Y_ALIGNMENT_FOOTER);
-        contentStream.drawString(footerText);
+        contentStream.newLineAtOffset(X_ALIGNMENT, Y_ALIGNMENT_FOOTER);
+        contentStream.showText(footerText);
         contentStream.endText();
     }
 
