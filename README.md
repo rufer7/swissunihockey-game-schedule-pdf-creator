@@ -11,6 +11,10 @@ A web application that generates and serves swiss unihockey game schedules as PD
 
 This application consumes the [swiss unihockey API v2](https://api-v2.swissunihockey.ch/api/doc)
 
+## App information
+To get information about the application, call the following endpoint.
+
+`.../info`
 
 ## Deployment to Heroku
 
