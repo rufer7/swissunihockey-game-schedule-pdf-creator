@@ -49,6 +49,13 @@ angular.module('gameSchedulePDFCreatorApp', ['ionic', 'gameSchedulePDFCreatorApp
 
 function IndexController($scope, SwissunihockeyAPIService, PDFGeneratorService) {
 
+    var date = new Date();
+    var season = date.getFullYear();
+    if (date.getMonth() < 5)
+    {
+        season -= 1;
+    }
+    $scope.season = season.toString() + "/" + (season + 1).toString();
     $scope.clubEntries = [];
     $scope.teamEntries = [];
     $scope.selectedClub = {
