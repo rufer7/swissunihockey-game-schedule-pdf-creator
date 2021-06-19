@@ -6,6 +6,7 @@
 
 A web application that generates and serves swiss unihockey game schedules as PDF documents
 
+
 ## Swiss unihockey API
 
 This application consumes the [swiss unihockey API v2](https://api-v2.swissunihockey.ch/api/doc)
