@@ -54,12 +54,10 @@ public class PDFGenerator {
     private static final int LINE_DISTANCE = 15;
     private static final int ROTATION = 90;
     private static final int ZERO = 0;
-    private static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss'Z'";
+    private static final String CALENDAR_DATE_FORMAT = "yyyyMMdd'T'HHmmss";
     private static final String GAME_SCHEDULE_DATE_FORMAT = "dd.MM.yyyy HH:mm";
     private static final String TEAM_DELIMITER = " - ";
     private static PDFont font;
-    private static ZoneId ZONE_ID_EUROPE_ZURICH = ZoneId.of("Europe/Zurich");
-    private static ZoneId ZONE_ID_UTC = ZoneId.of("UTC");
 
     public PDFGenerator() {
         font = PDType1Font.HELVETICA_BOLD;
@@ -123,6 +121,10 @@ public class PDFGenerator {
     private String getOverviewText(Calendar calendar) {
         String overviewText = "";
         for (Object o : calendar.getComponents()) {
+            if (((Component) o).getName() == Component.VTIMEZONE)
+            {
+                continue;
+            }
             Property property = ((Component) o).getProperties().getProperty(Property.DESCRIPTION);
             if (property.getValue().contains("Runde ")) {
                 overviewText = property.getValue().replace("\\", "").replaceAll("Runde\\s+\\d,+\\s", "");
@@ -139,6 +141,10 @@ public class PDFGenerator {
         int yPosition = Y_ALIGNMENT_GAMES;
 
         for (Object component : calendar.getComponents()) {
+            if (((Component)component).getName() == Component.VTIMEZONE)
+            {
+                continue;
+            }
             PropertyList properties = ((Component)component).getProperties();
 
             contentStream.beginText();
@@ -177,17 +183,13 @@ public class PDFGenerator {
     }
 
     private String formatDate(String dateAsString) {
-        ZonedDateTime zonedDateTime = parseDate(dateAsString);
-
-        LocalDateTime timeZoneAwareDateTime = LocalDateTime.ofInstant(zonedDateTime.toInstant(), ZONE_ID_EUROPE_ZURICH);
-
+        LocalDateTime timeZoneAwareDateTime = parseDate(dateAsString);
         return timeZoneAwareDateTime.format(DateTimeFormatter.ofPattern(GAME_SCHEDULE_DATE_FORMAT));
     }
 
-    private ZonedDateTime parseDate(String dateAsString) {
+    private LocalDateTime parseDate(String dateAsString) {
         try {
-            LocalDateTime utcDateTime = LocalDateTime.parse(dateAsString, DateTimeFormatter.ofPattern(CALENDAR_DATE_FORMAT));
-            return ZonedDateTime.of(utcDateTime, ZONE_ID_UTC);
+            return LocalDateTime.parse(dateAsString, DateTimeFormatter.ofPattern(CALENDAR_DATE_FORMAT));
         } catch (DateTimeParseException e) {
             LOG.error("Error occurred while parsing string representation of date: {}", dateAsString);
             throw new PDFCreationException();

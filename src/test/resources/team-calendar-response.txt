@@ -2,157 +2,176 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:icalendar-ruby
 CALSCALE:GREGORIAN
+X-WR-TIMEZONE:Europe/Zurich
+BEGIN:VTIMEZONE
+TZID:Europe/Zurich
+BEGIN:DAYLIGHT
+DTSTART:20210328T030000
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3
+TZNAME:CEST
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20211031T020000
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
+TZNAME:CET
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887199(swissunihockey.ch)
-DTSTART:20160925T123000Z
-DTEND:20160925T141500Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 1\, Saison 2016/17
-GEO:7.715658333333334;47.187
-LOCATION:Sporthalle Mittelholz Herzogenbuchsee
-SUMMARY:UHC W.W. Schüpfen-Busswil - Hornets R.Moosseedorf Worblental II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887199
+DTSTAMP:20210909T210737Z
+UID:game-987692(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20210926T121500
+DTEND;TZID=Europe/Zurich:20210926T140000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 1\, Saison 2021/22
+GEO:7.434973666666666;46.93067666666666
+LOCATION:Lerbermatt Köniz
+SUMMARY:Hornets R.Moosseedorf Worblental II - LUC Floorball Epalinges II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987692
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887204(swissunihockey.ch)
-DTSTART:20161002T144500Z
-DTEND:20161002T163000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 2\, Saison 2016/17
-GEO:7.644766743977867;47.01533203125
-LOCATION:Preisegg Hasle-Rüegsau
-SUMMARY:Racoons Herzogenbuchsee - Hornets R.Moosseedorf Worblental II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887204
+DTSTAMP:20210909T210737Z
+UID:game-987697(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20211010T143000
+DTEND;TZID=Europe/Zurich:20211010T161500
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 2\, Saison 2021/22
+GEO:6.636030000000001;46.771806
+LOCATION:Salle omnisports des Isles Yverdon - les - bains
+SUMMARY:Hornets R.Moosseedorf Worblental II - UHT TV Wohlen BE
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987697
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887205(swissunihockey.ch)
-DTSTART:20161009T080000Z
-DTEND:20161009T094500Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 3\, Saison 2016/17
-GEO:7.910354666666667;47.345996666666665
-LOCATION:Giroud Olma - Turnhallen BBZ Olten
-SUMMARY:Olten Zofingen II - Hornets R.Moosseedorf Worblental II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887205
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887212(swissunihockey.ch)
-DTSTART:20161022T144500Z
-DTEND:20161022T163000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 4\, Saison 2016/17
+DTSTAMP:20210909T210737Z
+UID:game-987699(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20211024T100000
+DTEND;TZID=Europe/Zurich:20211024T114500
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 3\, Saison 2021/22
 GEO:7.498849487304684;47.0142578125
 LOCATION:RAIFFEISEN unihockeyARENA Urtenen Schönbühl
-SUMMARY:UHC Bowil - Hornets R.Moosseedorf Worblental II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887212
+SUMMARY:Hornets R.Moosseedorf Worblental II - Floorball Köniz II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987699
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887214(swissunihockey.ch)
-DTSTART:20161106T111500Z
-DTEND:20161106T130000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 5\, Saison 2016/17
-GEO:7.743465666666666;46.97507333333333
-LOCATION:Ballsporthalle Oberemmental (BOE) Zollbrück
-SUMMARY:Hornets R.Moosseedorf Worblental II - UHT Arni
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887214
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887220(swissunihockey.ch)
-DTSTART:20161113T154500Z
-DTEND:20161113T173000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 6\, Saison 2016/17
-GEO:7.498849487304684;47.0142578125
-LOCATION:RAIFFEISEN unihockeyARENA Urtenen Schönbühl
-SUMMARY:Hornets R.Moosseedorf Worblental II - Gürbetal RK Belp
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887220
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887223(swissunihockey.ch)
-DTSTART:20161120T133000Z
-DTEND:20161120T151500Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 7\, Saison 2016/17
-GEO:7.6286138333333335;46.922333333333334
-LOCATION:Espace-Arena Biglen
-SUMMARY:UHT Uetigen - Hornets R.Moosseedorf Worblental II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887223
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887226(swissunihockey.ch)
-DTSTART:20161204T111500Z
-DTEND:20161204T130000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 8\, Saison 2016/17
+DTSTAMP:20210909T210737Z
+UID:game-987704(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20211107T121500
+DTEND;TZID=Europe/Zurich:20211107T140000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 4\, Saison 2021/22
 GEO:7.3787183333333335;47.038195
 LOCATION:Sporthalle Schüpfen
-SUMMARY:Hornets R.Moosseedorf Worblental II - UHC W.W. Schüpfen-Busswil
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887226
+SUMMARY:Hornets R.Moosseedorf Worblental II - Floorball Fribourg II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987704
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887230(swissunihockey.ch)
-DTSTART:20170108T111500Z
-DTEND:20170108T130000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 9\, Saison 2016/17
-GEO:7.499666849772134;46.899499511718666
-LOCATION:Dreifachsporthalle Neumatt Belp
-SUMMARY:Hornets R.Moosseedorf Worblental II - Racoons Herzogenbuchsee
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887230
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887233(swissunihockey.ch)
-DTSTART:20170114T090000Z
-DTEND:20170114T104500Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 10\, Saison 2016/17
-GEO:7.6286138333333335;46.922333333333334
-LOCATION:Espace-Arena Biglen
-SUMMARY:Hornets R.Moosseedorf Worblental II - Olten Zofingen II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887233
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887239(swissunihockey.ch)
-DTSTART:20170122T133000Z
-DTEND:20170122T151500Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 11\, Saison 2016/17
-GEO:7.715658333333334;47.187
-LOCATION:Sporthalle Mittelholz Herzogenbuchsee
-SUMMARY:Hornets R.Moosseedorf Worblental II - UHC Bowil
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887239
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887244(swissunihockey.ch)
-DTSTART:20170205T154500Z
-DTEND:20170205T173000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 12\, Saison 2016/17
-GEO:7.910354666666667;47.345996666666665
-LOCATION:Giroud Olma - Turnhallen BBZ Olten
-SUMMARY:UHT Arni - Hornets R.Moosseedorf Worblental II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887244
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887245(swissunihockey.ch)
-DTSTART:20170219T090000Z
-DTEND:20170219T104500Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 13\, Saison 2016/17
-LOCATION:
-SUMMARY:Gürbetal RK Belp - Hornets R.Moosseedorf Worblental II
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887245
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:20160729T070022Z
-UID:game-887252(swissunihockey.ch)
-DTSTART:20170304T154500Z
-DTEND:20170304T173000Z
-DESCRIPTION:Herren 3. Liga\, Gruppe 2\, Runde 14\, Saison 2016/17
+DTSTAMP:20210909T210737Z
+UID:game-987710(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20211113T164500
+DTEND;TZID=Europe/Zurich:20211113T183000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 5\, Saison 2021/22
 GEO:7.498849487304684;47.0142578125
 LOCATION:RAIFFEISEN unihockeyARENA Urtenen Schönbühl
-SUMMARY:Hornets R.Moosseedorf Worblental II - UHT Uetigen
-URL:http://www.swissunihockey.ch/de/game-detail?game_id=887252
+SUMMARY:Hornets R.Moosseedorf Worblental II - Eagles UHC-Aigle
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987710
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987713(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20211127T143000
+DTEND;TZID=Europe/Zurich:20211127T161500
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 6\, Saison 2021/22
+GEO:6.955648833333333;46.31946666666667
+LOCATION:La Planchette Aigle
+SUMMARY:Hornets R.Moosseedorf Worblental II - UC Yverdon
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987713
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987715(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20211218T100000
+DTEND;TZID=Europe/Zurich:20211218T114500
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 7\, Saison 2021/22
+GEO:6.636030000000001;46.771806
+LOCATION:Salle omnisports des Isles Yverdon - les - bains
+SUMMARY:UHC W.W. Schüpfen-Busswil - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987715
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987721(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20220109T143000
+DTEND;TZID=Europe/Zurich:20220109T161500
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 8\, Saison 2021/22
+GEO:6.580795833333334;46.519868333333335
+LOCATION:Salle omnisports UNIL Dorigny Lausanne
+SUMMARY:LUC Floorball Epalinges II - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987721
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987726(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20220122T164500
+DTEND;TZID=Europe/Zurich:20220122T183000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 9\, Saison 2021/22
+GEO:7.157805833333333;46.796841666666666
+LOCATION:Ste. Croix Fribourg
+SUMMARY:UHT TV Wohlen BE - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987726
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987727(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20220130T100000
+DTEND;TZID=Europe/Zurich:20220130T114500
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 10\, Saison 2021/22
+GEO:7.434973666666666;46.93067666666666
+LOCATION:Lerbermatt Köniz
+SUMMARY:Floorball Köniz II - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987727
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987734(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20220212T164500
+DTEND;TZID=Europe/Zurich:20220212T183000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 11\, Saison 2021/22
+GEO:6.580795833333334;46.519868333333335
+LOCATION:Salle omnisports UNIL Dorigny Lausanne
+SUMMARY:Floorball Fribourg II - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987734
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987736(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20220220T121500
+DTEND;TZID=Europe/Zurich:20220220T140000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 12\, Saison 2021/22
+GEO:7.3787183333333335;47.038195
+LOCATION:Sporthalle Schüpfen
+SUMMARY:Eagles UHC-Aigle - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987736
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987740(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20220306T121500
+DTEND;TZID=Europe/Zurich:20220306T140000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 13\, Saison 2021/22
+GEO:7.270245833333333;46.947005
+LOCATION:Schul- und Sportanlagen Allenlüften Mühleberg
+SUMMARY:UC Yverdon - Hornets R.Moosseedorf Worblental II
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987740
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20210909T210737Z
+UID:game-987744(swissunihockey.ch)
+DTSTART;TZID=Europe/Zurich:20220312T121500
+DTEND;TZID=Europe/Zurich:20220312T140000
+DESCRIPTION:Herren GF 3. Liga\, Gruppe 1\, Runde 14\, Saison 2021/22
+GEO:6.955648833333333;46.31946666666667
+LOCATION:La Planchette Aigle
+SUMMARY:Hornets R.Moosseedorf Worblental II - UHC W.W. Schüpfen-Busswil
+URL:http://www.swissunihockey.ch/de/game-detail?game_id=987744
 END:VEVENT
 END:VCALENDAR
